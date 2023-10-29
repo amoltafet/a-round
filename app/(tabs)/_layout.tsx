@@ -1,38 +1,45 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
+import { Link, Tabs, Navigator, useNavigation } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
-
+import Ionicons from '@expo/vector-icons/Ionicons';
 import Colors from '../../constants/Colors';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof Ionicons>['name'];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const navigator = useNavigation<Navigator>();
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
       }}>
+        <Tabs.Screen
+        name='messages'
+        options={{
+          title: 'Inbox',
+          tabBarIcon: ({ color }) => <TabBarIcon name="chatbox-ellipses-outline" color={color} />,
+        }}
+      />
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'A-Round',
+          tabBarIcon: ({ color }) => <TabBarIcon name="at-circle" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
+                  <Ionicons
+                    name="information-circle-outline"
                     size={25}
                     color={Colors[colorScheme ?? 'light'].text}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
@@ -44,12 +51,31 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="profile"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Profile',
+          tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
+          headerLeft: () => (
+            <Pressable onPress={() => navigator.navigate('settings')}>
+            <Ionicons
+              name="settings-outline"
+              style={{ marginLeft: 15 }}
+              size={25}
+            />
+            </Pressable>
+          ),
+          headerRight: () => (
+            <Ionicons
+              name='notifications-outline'
+              style={{ marginRight: 15 }}
+              size={25}
+            />
+          ),
+            
+
         }}
       />
+
     </Tabs>
   );
 }
