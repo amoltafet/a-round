@@ -65,11 +65,14 @@ export default function TabLayout() {
             </Pressable>
           ),
           headerRight: () => (
+            <Pressable onPress={() => navigator.navigate('notifs')}>
             <Ionicons
-              name='notifications-outline'
+              name="notifications-outline"
               style={{ marginRight: 15 }}
               size={25}
             />
+            </Pressable>
+              
           ),
             
 
