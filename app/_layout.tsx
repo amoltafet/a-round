@@ -1,7 +1,7 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
+import { SplashScreen, Stack} from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -50,7 +50,17 @@ function RootLayoutNav() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="settings" options={{ presentation: 'modal' }} />
-          <Stack.Screen name="notifs" />
+          <Stack.Screen name="notifs" options={{
+            title: 'Notifications',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          
+          }}/>
         </Stack>
       </ThemeProvider>
 

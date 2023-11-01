@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Text, View } from '../components/Themed';
-import { Switch , Chip} from 'react-native-paper';
+import { Switch } from 'react-native-paper';
+import Colors from "../constants/Colors";
 
 interface SettingsCardProps {
     title: string;
@@ -11,7 +12,6 @@ interface SettingsCardProps {
 
 const SettingsCard: React.FC<SettingsCardProps> = ({ title, subTitle, icon }) => {
     const [toggleState, setToggleState] = useState(false);
-
     const handleToggle = () => {
         setToggleState(!toggleState);
     };
