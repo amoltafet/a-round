@@ -29,12 +29,7 @@ export default function NotificationCard({
         backgroundColor: color,
       }}
     >
-        {avatar ? (
       <Avatar.Text size={24} label={avatar} style={{ margin: 10 }} />
-    ) : (
-        <Avatar.Text size={24} label="XD" style={{ margin: 10 }} />
-    )}
-
       <View style={{ flex: 1, margin: 5, backgroundColor: color }}>
         <Text style={{ fontSize: 19, fontWeight: "500" }}>{title}</Text>
         <Text style={{ fontSize: 12, color: "grey" }}>{subtitle}</Text>
