@@ -23,7 +23,6 @@ export default function ModalScreen() {
         <Text style={styles.title}>You joined a-round on November 5, 2021 </Text>
 
        
-
     </View>
   );
 }

@@ -24,7 +24,6 @@ export default function NotifsScreen() {
         style={{ maxHeight: 175 }}
         data={[
           {
-            avatar: "clipboard-outline",
             title: "New terms and agreements",
             subtitle: "check out who wants to connect",
             date: "2h ago",

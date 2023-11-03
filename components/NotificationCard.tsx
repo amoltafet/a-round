@@ -2,9 +2,10 @@ import React from "react";
 import { View } from "./Themed";
 import { Text } from "./Themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Avatar } from "react-native-paper";
 
 interface NotificationCardProps {
-  avatar: string;
+  avatar?: string;
   title: string;
   subtitle: string;
   date?: string;
@@ -28,7 +29,12 @@ export default function NotificationCard({
         backgroundColor: color,
       }}
     >
-      <Ionicons name={avatar} size={24} color="black" style={{ margin: 10 }} />
+        {avatar ? (
+      <Avatar.Text size={24} label={avatar} style={{ margin: 10 }} />
+    ) : (
+        <Avatar.Text size={24} label="XD" style={{ margin: 10 }} />
+    )}
+
       <View style={{ flex: 1, margin: 5, backgroundColor: color }}>
         <Text style={{ fontSize: 19, fontWeight: "500" }}>{title}</Text>
         <Text style={{ fontSize: 12, color: "grey" }}>{subtitle}</Text>
