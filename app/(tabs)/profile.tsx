@@ -20,6 +20,7 @@ export default function ProfileScreen() {
         title="Complete Privacy"
         subTitle="Control your profile visibility"
         icon="eye-outline"
+        toggle={true}
       />
     </View>
   );
@@ -31,7 +32,7 @@ function Profile() {
       <Avatar.Text size={48} label="XD" />
       <View style={{ marginLeft: 10 }}>
         <Text style={styles.title}>Xervior Dormand</Text>
-        <Text style={styles.subTitle}>Project Manager at Facebook</Text>
+        <Text style={styles.subTitle}>@2ervior</Text>
       </View>
     </View>
   );

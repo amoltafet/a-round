@@ -54,19 +54,18 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(settingsTabs)" options={{ headerShown: false }} />
+
           <Stack.Screen
             name="settings"
             options={{
-              title: "Settings",
+              title: "Settings & Privacy",
             }}
           />
           <Stack.Screen
             name="notifs"
             options={{
               title: "Notifications",
-              headerStyle: {
-                backgroundColor: "#fff",
-              },
               headerTintColor: "#000",
               headerTitleStyle: {
                 fontWeight: "bold",
