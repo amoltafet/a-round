@@ -20,7 +20,7 @@ export default function TabOneScreen() {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // variables
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const snapPoints = useMemo(() => ["25%", "25%"], []);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
@@ -136,12 +136,8 @@ export default function TabOneScreen() {
           onChange={handleSheetChanges}
         >
           <View style={{ flex: 1, padding: 10 }}>
-            <Text style={styles.title}>Last Location </Text>
-            <Text style={styles.title}>
-              Location is only updated when you are visible and have app opened
-            </Text>
-            <Text>Visibility Settings</Text>
-            <SettingsCard
+            <Text style={styles.title}>Visibility Settings</Text>
+              <SettingsCard
               title="Visibility"
               subTitle="Turn on visibility to see people around you"
               icon="eye-outline"
@@ -215,10 +211,10 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "600",
+    fontSize: 18,
+    fontWeight: "500",
     marginLeft: 10,
-    marginTop: 10,
+    marginBottom: 10,
   },
   statusBar: {
     flexDirection: "row",
