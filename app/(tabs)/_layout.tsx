@@ -25,6 +25,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="messages"
         options={{
+          headerShown: false,
           title: "Inbox",
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="chatbox-ellipses-outline" color={color} />
@@ -46,34 +47,7 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
-          headerLeft: () => (
-            <Link href="/settings" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <Ionicons
-                    name="settings-outline"
-                    style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-          headerRight: () => (
-            <Link href="/notifs" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <Ionicons
-                    name="notifications-outline"
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          headerShown: false,
         }}
       />
     </Tabs>

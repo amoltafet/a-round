@@ -29,7 +29,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
   return (
     <Pressable
       onPress={() => router.push(link)}
-      style={{ backgroundColor: Colors.white }}
+      style={{ backgroundColor: Colors.secondary.main }}
     >
       <View
         style={{
@@ -41,7 +41,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
           margin: 3,
         }}
       >
-        <Ionicons name={icon} size={24} color="black" style={{ margin: 10 }} />
+        <Ionicons name={icon} size={24} color={Colors.primary.main} style={{ margin: 10 }} />
         <View style={{ flex: 1, margin: 5 }}>
           <Text style={{ fontSize: 19, fontWeight: "500" }}>{title}</Text>
           <Text style={{ fontSize: 12, color: "grey" }}>{subTitle}</Text>
@@ -56,7 +56,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
           <Ionicons
             name="chevron-forward"
             size={24}
-            color="black"
+            color={Colors.primary.main}
             style={{ margin: 10 }}
           />
         )}

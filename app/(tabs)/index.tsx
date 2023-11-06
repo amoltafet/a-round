@@ -6,7 +6,7 @@ import PeopleCard from "../../components/PeopleCard";
 import { Avatar, Chip } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { Alert, Button } from "react-native";
@@ -32,52 +32,62 @@ export default function TabOneScreen() {
 
   return (
     <BottomSheetModalProvider>
-      <View style={{ flex: 1, paddingTop: 50, backgroundColor: Colors.white }}>
+      <View
+        style={{
+          flex: 1,
+          paddingTop: 50,
+          backgroundColor: Colors.secondary.main,
+        }}
+      >
         <UserCard />
         <View style={styles.container}>
-          <View
-            style={{
-              borderColor: Colors.white,
-              backgroundColor: Colors.white,
-              borderWidth: 2,
-              borderRadius: 10,
-              minHeight: 50,
-              padding: 5,
-            }}
-          >
-            <View
-              style={{ flexDirection: "row", backgroundColor: Colors.white }}
+          <View style={{ flexDirection: "row", marginBottom: 3 }}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "400",
+                marginLeft: 10,
+                marginTop: 15,
+                flex: 1,
+              }}
             >
-              <Avatar.Text
-                size={48}
-                label="46"
-                style={{
-                  backgroundColor: Colors.blue,
-                }}
-              />
-              <Text style={styles.title}>People Around You</Text>
-            </View>
-            <View style={styles.statusBar}>
-              <Chip
-                icon=""
-                style={{ marginRight: 10, backgroundColor: Colors.blue }}
-              >
-                <Text style={{ color: Colors.white }}>You are visible</Text>
-              </Chip>
-              <Chip
-                icon="eye-off-outline"
-                style={{ marginRight: 10, backgroundColor: Colors.green }}
-                mode="flat"
-              >
-                Private Mode
-              </Chip>
-              <Chip icon="share" style={{ marginRight: 10 }} mode="outlined">
-                Share
-              </Chip>
-            </View>
-            <Text style={{ color: Colors.white }}>
-              Visibility needs to be turned on to see people around you
+              People Nearby
             </Text>
+            <View
+              style={{
+                padding: 1,
+                borderRadius: 15,
+                backgroundColor: Colors.secondary.main,
+                borderWidth: 1,
+                borderColor: "lightgrey",
+                marginRight: 5,
+              }}
+            >
+              <Ionicons
+                name="apps-outline"
+                size={18}
+                color={Colors.primary.main}
+                style={{ margin: 10 }}
+              />
+            </View>
+
+            <View
+              style={{
+                padding: 1,
+                borderRadius: 15,
+                backgroundColor: Colors.secondary.main,
+                borderWidth: 1,
+                borderColor: "lightgrey",
+                marginRight: 10,
+              }}
+            >
+              <Ionicons
+                name="reorder-four-outline"
+                size={18}
+                color={Colors.primary.main}
+                style={{ margin: 10 }}
+              />
+            </View>
           </View>
 
           <FlatList
@@ -153,20 +163,19 @@ export default function TabOneScreen() {
 function UserCard() {
   return (
     <View style={{ flexDirection: "row", margin: 5, justifyContent: "center" }}>
-      <View style={{ flex: 1 }}>
-        <Text style={styles.title}>Hello</Text>
-        <Text
-          style={{
-            fontSize: 40,
-            fontWeight: "500",
-            marginLeft: 10,
-          }}
-        >
-          Xervior!
-        </Text>
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        <View style={styles.statusCard}>
+          <Text style={{ color: Colors.primary.main, fontSize: 18 }}>42</Text>
+          <Text style={{ color: Colors.primary.main }}>People</Text>
+        </View>
+        <View style={styles.statusCard}>
+          <Text style={{ color: Colors.primary.main, fontSize: 18 }}>4</Text>
+          <Text style={{ color: Colors.primary.main }}>Connections </Text>
+        </View>
       </View>
 
-      <View
+      <Pressable
+        onPress={() => router.push("settings")}
         style={{
           marginTop: 20,
           marginLeft: 20,
@@ -180,9 +189,10 @@ function UserCard() {
         }}
       >
         <Ionicons name="color-wand-outline" size={32} color="white" />
-      </View>
+      </Pressable>
 
-      <View
+      <Pressable
+        onPress={() => router.push("search")}
         style={{
           marginTop: 20,
           marginRight: 20,
@@ -193,8 +203,8 @@ function UserCard() {
           padding: 5,
         }}
       >
-        <Ionicons name="search-outline" size={32} color="black" />
-      </View>
+        <Ionicons name="search-outline" size={32} color={Colors.primary.main} />
+      </Pressable>
     </View>
   );
 }
@@ -212,14 +222,33 @@ const styles = StyleSheet.create({
   },
   statusBar: {
     flexDirection: "row",
-    marginBottom: 5,
     marginTop: 5,
+  },
+  statusCard: {
+    backgroundColor: Colors.secondary.main,
+    borderWidth: 1,
+    borderColor: Colors.secondary.main,
+    shadowColor: Colors.primary.main,
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    shadowOffset: {
+      height: 1,
+      width: 1,
+    },
+    borderRadius: 10,
+    padding: 15,
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 15,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   filterButton: {
     position: "absolute",
     bottom: 10,
     left: 10,
-    backgroundColor: Colors.blue,
+    backgroundColor: Colors.primary.main,
     padding: 10,
     borderRadius: 10,
   },

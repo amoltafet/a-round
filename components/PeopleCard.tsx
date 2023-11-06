@@ -4,6 +4,8 @@ import { Text, View } from "../components/Themed";
 import { Switch, Card } from "react-native-paper";
 import { ImageBackground } from "react-native";
 import { StyleSheet } from "react-native";
+import { FontAwesome } from '@expo/vector-icons'; 
+
 
 interface SettingsCardProps {
   name?: string;
@@ -13,26 +15,6 @@ interface SettingsCardProps {
 }
 
 const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover, bio, job }) => {
-  const skeletonCard = () => {
-    return <View style={styles.container}>
-      <Card style={{ flex: 1 }}>
-      <Card.Cover
-          source={cover ? { uri: cover } : { uri: "https://picsum.photos/22" }}
-          style={{ height: 250 }}
-        />
-        <View style={styles.info}>
-          <Text style={styles.title}></Text>
-          <Text style={styles.text}></Text>
-        </View>
-    </Card>
-
-    </View>;
-  };
-
-    if (!name) {
-        return skeletonCard();
-    }
-
   return (
    
     <View style={styles.container}>
@@ -45,6 +27,9 @@ const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover, bio, job }) => {
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.text}>{bio}</Text>
         </View>
+        <View style={styles.pokeIcon}>
+          <FontAwesome name="hand-o-up" size={24} color="white" />
+        </View>
       </Card>
     </View>
   );
@@ -52,12 +37,12 @@ const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover, bio, job }) => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 250,
+    height: 250,
     borderColor: "lightgrey",
     borderWidth: 1,
-    borderRadius: 10,
-    margin: 3,
-    width: "50%",
+    borderRadius: 15,
+    margin: 10,
+    width: "45%",
     backgroundBlendMode: "darken",
   },
   text: {
@@ -74,7 +59,16 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "100%",
     backgroundColor: "rgba(0,0,0,0.5)",
+    borderRadius: 15,
     padding: 10,
+  },
+  pokeIcon: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    padding: 10,
+    borderRadius: 50,
   },
 });
 
