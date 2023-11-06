@@ -1,15 +1,13 @@
 import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+import { Text, View } from '../components/Themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import SettingsCard from '../../components/SettingsCard';
-import Colors from '../../constants/Colors';
+import SettingsCard from '../components/SettingsCard';
+import Colors from '../constants/Colors';
 
-export default function Messages() {
+export default function Search() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Messages & Pokes</Text>
+      <Text style={styles.title}>Search</Text>
       <SettingsCard title="See all your pokes" icon='' />
     </SafeAreaView>
   );
@@ -18,7 +16,6 @@ export default function Messages() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
     padding: 10,
     backgroundColor: Colors.white,
   },

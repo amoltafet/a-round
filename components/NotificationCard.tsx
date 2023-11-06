@@ -2,7 +2,6 @@ import React from "react";
 import { View } from "./Themed";
 import { Text } from "./Themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Avatar } from "react-native-paper";
 
 interface NotificationCardProps {
   avatar?: string;
