@@ -9,6 +9,7 @@ interface NotificationCardProps {
   subtitle: string;
   date?: string;
   color?: string;
+  name?: string;
 }
 
 export default function NotificationCard({
@@ -17,30 +18,35 @@ export default function NotificationCard({
   subtitle,
   date,
   color,
+  name,
 }: NotificationCardProps): JSX.Element {
   return (
     <View
       style={{
         flexDirection: "row",
-        borderColor: "lightgrey",
+        borderColor: "white",
         borderWidth: 1,
         borderRadius: 10,
         backgroundColor: color,
       }}
     >
-      <Ionicons name={avatar} size={24} color="black" style={{ margin: 10 }} />
-      <View style={{ flex: 1, margin: 5, backgroundColor: color }}>
-        <Text style={{ fontSize: 19, fontWeight: "500" }}>{title}</Text>
-        <Text style={{ fontSize: 12, color: "grey" }}>{subtitle}</Text>
+        {avatar ? (
+      <Avatar.Text size={24} label={avatar} style={{ margin: 12 }} />
+    ) : (
+        <Avatar.Text size={24} label="XD" style={{ margin: 10 }} />
+    )}
+      <View style={{ flex: 1, margin: 5.5, backgroundColor: color }}>      
+        <Text style={{ fontSize: 15, fontWeight: "bold" }}>{title}</Text>
+        <Text style={{ fontSize: 12, color: "black" }}>{subtitle}</Text>
       </View>
 
       {date ? (
-        <Text style={{ fontSize: 12, color: "grey", margin: 10 }}>{date}</Text>
+        <Text style={{ fontSize: 12, color: "black", margin: 12 }}>{date}</Text>
       ) : (
         <Ionicons
           name="chevron-forward"
           size={24}
-          color="black"
+          color="white"
           style={{ margin: 10 }}
         />
       )}

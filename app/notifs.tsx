@@ -9,9 +9,8 @@ export default function NotifsScreen() {
   return (
     <View style={styles.container}>
       <NotificationCard
-        avatar="ios-person"
-        title="3 Nudges"
-        subtitle="check out who wants to connect"
+        title="Nudge requestes"
+        subtitle="Approve or ignore requests"
         color="lightblue"
       />
       <View
@@ -21,29 +20,31 @@ export default function NotifsScreen() {
       />
       <Text style={styles.title}>Recent</Text>
       <FlatList
-        style={{ maxHeight: 175 }}
+        style={{ maxHeight: 180 }}
         data={[
           {
-            title: "New terms and agreements",
-            subtitle: "check out who wants to connect",
+            title: "Sidiq Moltafet",
+            subtitle: "has requested to nudge you.",
             date: "2h ago",
+            color: "white",
+            
           },
           {
-            avatar: "contract",
-            title: "Photo is needed",
-            subtitle: "check out who wants to connect",
+            title: "Hudson Burdick",
+            subtitle: "has requested to nudge you.",
             date: "2h ago",
+            color: "white",
           },
           {
-            avatar: "pencil",
-            title: "Edit confirmed",
-            subtitle: "check out who wants to connect",
+            title: "James Rich",
+            subtitle: "has viewed your profile.",
             date: "2h ago",
+            color: "white",
           },
         ]}
         renderItem={({ item }) => (
           <View
-            style={{ marginBottom: 8 }}
+            style={{ marginBottom: 12 }}
             lightColor="#eee"
             darkColor="rgba(255,255,255,0.1)"
           >
@@ -52,48 +53,49 @@ export default function NotifsScreen() {
               title={item.title}
               subtitle={item.subtitle}
               date={item.date}
+              color={item.color}
             />
           </View>
         )}
         keyExtractor={(item) => item.title}
       />
-      <Text style={styles.title}>Last Week</Text>
       <FlatList
         data={[
           {
-            avatar: "ios-person",
-            title: "3 Nudges",
-            subtitle: "check out who wants to connect",
+            title: "Jesiica Rudoff",
+            subtitle: "who you, might know, is on a-round",
             date: "2h ago",
+            color: "white",
+            
           },
           {
-            avatar: "pencil",
-            title: "Edit confirmed",
-            subtitle: "check out who wants to connect",
+            title: "Melika Soucof",
+            subtitle: "is at the same location as you",
             date: "2h ago",
+            color: "white",
           },
           {
-            avatar: "ios-person",
-            title: "James Rich Connected",
-            subtitle: "check out who wants to connect",
+            title: "James Rich",
+            subtitle: "traveled to Spokane, Washington",
             date: "2h ago",
+            color: "white",
           },
           {
-            avatar: "ios-person",
-            title: "Michale R view your profile",
-            subtitle: "check out who wants to connect",
+            title: "Michale Rosu",
+            subtitle: "had viewed your profile",
             date: "2h ago",
+            color: "white",
           },
           {
-            avatar: "clipboard-outline",
-            title: "3 Nudges",
-            subtitle: "check out who wants to connect",
+            title: "You have mutiple nudge requests",
+            subtitle: "approve or deny your nudge requests!",
             date: "2h ago",
+            color: "white",
           },
         ]}
         renderItem={({ item }) => (
           <View
-            style={{ marginBottom: 8 }}
+            style={{ marginBottom: 10 }}
             lightColor="#eee"
             darkColor="rgba(255,255,255,0.1)"
           >
@@ -102,6 +104,7 @@ export default function NotifsScreen() {
               title={item.title}
               subtitle={item.subtitle}
               date={item.date}
+              color={item.color}
             />
           </View>
         )}
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "500",
-    marginBottom: 5,
+    marginBottom: 10,
   },
   separator: {
     marginVertical: 10,
