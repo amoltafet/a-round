@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { Alert, Button } from "react-native";
 import {
+  BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
@@ -30,15 +31,29 @@ export default function TabOneScreen() {
     console.log("handleSheetChanges", index);
   }, []);
 
+  const renderBackdrop = useCallback(
+    (props: any) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        enableTouchThrough={true}
+      />
+    ),
+    []
+  );
+
   return (
     <BottomSheetModalProvider>
-      <View
+
+     <View
         style={{
           flex: 1,
           paddingTop: 50,
           backgroundColor: Colors.secondary.main,
         }}
       >
+
         <UserCard />
         <View style={styles.container}>
           <View style={{ flexDirection: "row", marginBottom: 3 }}>
@@ -125,15 +140,19 @@ export default function TabOneScreen() {
         </View>
         <View style={styles.filterButton}>
           <Pressable onPress={handlePresentModalPress}>
-            <Ionicons name="location-outline" size={36} color={Colors.white} />
+            <Ionicons name="eye-outline" size={36} color={Colors.secondary.main} />
           </Pressable>
         </View>
+       
+     </View>
 
-        <BottomSheetModal
+     
+     <BottomSheetModal
           ref={bottomSheetModalRef}
           index={1}
           snapPoints={snapPoints}
           onChange={handleSheetChanges}
+          backdropComponent={renderBackdrop}
         >
           <View style={{ flex: 1, padding: 10 }}>
             <Text style={styles.title}>Visibility Settings</Text>
@@ -151,7 +170,6 @@ export default function TabOneScreen() {
             />
           </View>
         </BottomSheetModal>
-      </View>
     </BottomSheetModalProvider>
   );
 }

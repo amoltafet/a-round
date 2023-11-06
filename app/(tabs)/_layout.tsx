@@ -20,7 +20,25 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tabIconDefault,
+        tabBarStyle: {
+          backgroundColor: Colors.white,
+          borderWidth: 1,
+          borderColor: "lightgrey",
+          shadowColor: "black",
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.2,
+          elevation: 1,
+          borderRadius: 50,
+          height: 60,
+          marginBottom: 15,
+          paddingBottom: 10,
+          paddingTop: 10,
+          marginHorizontal: 30,
+        },
+
       }}
+      
     >
       <Tabs.Screen
         name="messages"

@@ -9,6 +9,7 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { View } from "../components/Themed";
+import Colors from "../constants/Colors";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,7 +53,21 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
+        <Stack 
+          initialRouteName="splash"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: Colors.secondary.main,
+            },
+            headerTintColor: "#000",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+            contentStyle: {
+              backgroundColor: Colors.secondary.main,
+            },  
+          }}
+        >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(settingsTabs)" options={{ headerShown: false }} />
           <Stack.Screen name="search" options={{ presentation: "modal", headerShown: false }} />
