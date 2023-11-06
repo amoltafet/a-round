@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
-import { Chip, Avatar, Button, Card } from "react-native-paper";
+import { Chip, Avatar, Button, Card, IconButton } from "react-native-paper";
 import SettingsCard from "../../components/SettingsCard";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -27,45 +27,13 @@ function Profile() {
   return (
     <View style={styles.profileContainer}>
       <Avatar.Text size={48} label="XD" />
-      <View style={{ marginLeft: 10 }}>
+      <View style={{ marginLeft: 10, flex: 1 }}>
         <Text style={styles.title}>Xervior Dormand</Text>
         <Text style={styles.subTitle}>@2ervior</Text>
       </View>
-      <View style={{ flexDirection: "row", marginLeft: 60 }}>
-        <Pressable
-          onPress={() => router.push("settings")}
-          style={{
-            borderWidth: 1,
-            borderColor: "lightgrey",
-            borderRadius: 50,
-            padding: 10,
-            marginRight: 10,
-            backgroundColor: Colors.primary.main,
-          }}
-        >
-          <Ionicons
-            name="settings-outline"
-            size={24}
-            color={Colors.secondary.main}
-          />
-        </Pressable>
-        <Pressable
-          onPress={() => router.push("notifs")}
-          style={{
-            borderWidth: 1,
-            borderColor: "lightgrey",
-            borderRadius: 50,
-            padding: 10,
-            marginRight: 10,
-            backgroundColor: Colors.primary.main,
-          }}
-        >
-          <Ionicons
-            name="notifications-outline"
-            size={24}
-            color={Colors.secondary.main}
-          />
-        </Pressable>
+      <View style={{ flexDirection: "row"}}>
+      <IconButton icon="cog"  size={24} style={{marginRight: 5}} mode="outlined" onPress={() => router.push("settings")} />
+      <IconButton icon="bell" size={24} style={{marginRight: 5}} mode="contained" onPress={() => router.push("notifs")} />
       </View>
     </View>
   );
@@ -82,15 +50,18 @@ function Connections() {
           marginRight: 5,
         }}
       >
-        10 Profile Views
+          532 Connections
       </Button>
       <Button
         mode="outlined"
+        icon="bug-outline"
         onPress={() => console.log("Pressed")}
         style={{ marginLeft: 5, borderColor: Colors.primary.main }}
       >
-        <Text>532 Connections</Text>
+        <Text>Profile Views</Text>
       </Button>
+     
+
     </View>
   );
 }

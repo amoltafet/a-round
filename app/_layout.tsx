@@ -53,41 +53,44 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack 
-          initialRouteName="splash"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: Colors.secondary.main,
-            },
-            headerTintColor: "#000",
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
-            contentStyle: {
-              backgroundColor: Colors.secondary.main,
-            },  
+      <Stack
+        initialRouteName="splash"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.secondary.main,
+          },
+          headerTintColor: "#000",
+          headerTitleStyle: {
+            fontWeight: "500",
+          },
+          contentStyle: {
+            backgroundColor: Colors.secondary.main,
+          },
+        }}
+      >
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(settingsTabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="search"
+          options={{
+            presentation: "modal",
+            headerSearchBarOptions: {},
+            title: "Search People Around You",
           }}
-        >
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(settingsTabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="search" options={{ presentation: "modal", headerShown: false }} />
-          <Stack.Screen
-            name="settings"
-            options={{
-              title: "Settings & Privacy",
-            }}
-          />
-          <Stack.Screen
-            name="notifs"
-            options={{
-              title: "Notifications",
-              headerTintColor: "#000",
-              headerTitleStyle: {
-                fontWeight: "bold",
-              },
-            }}
-          />
-        </Stack>
+        />
+        <Stack.Screen
+          name="settings"
+          options={{
+            title: "Settings & Privacy",
+          }}
+        />
+        <Stack.Screen
+          name="notifs"
+          options={{
+            title: "Notifications",
+          }}
+        />
+      </Stack>
     </ThemeProvider>
   );
 }

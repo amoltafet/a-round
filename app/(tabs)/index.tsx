@@ -142,8 +142,7 @@ export default function TabOneScreen() {
           <Pressable onPress={handlePresentModalPress}>
             <Ionicons name="eye-outline" size={36} color={Colors.secondary.main} />
           </Pressable>
-        </View>
-       
+        </View>       
      </View>
 
      
@@ -266,4 +265,5 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
   },
+
 });

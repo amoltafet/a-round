@@ -21,7 +21,7 @@ const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover, bio, job }) => {
       <Card style={{ flex: 1 }}>
         <Card.Cover
           source={cover ? { uri: cover } : { uri: "https://picsum.photos/700" }}
-          style={{ height: 250 }}
+          style={{ height: 100 }}
         />
         <View style={styles.info}>
           <Text style={styles.title}>{name}</Text>
@@ -37,7 +37,7 @@ const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover, bio, job }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 250,
+    height: 100,
     borderColor: "lightgrey",
     borderWidth: 1,
     borderRadius: 15,
