@@ -35,4 +35,16 @@ const mockUsers: User[] = [
     },
 ];
 
+
+for (let i = 4; i <= 22; i++) {
+    mockUsers.push({
+        id: i,
+        name: `User ${i}`,
+        email: `user${i}@example.com`,
+        username: `user${i}`,
+        avatar: `https://randomuser.me/api/portraits/men/${i}.jpg`,
+        connections: Math.floor(Math.random() * 1000),
+    });
+}
+
 export default mockUsers;

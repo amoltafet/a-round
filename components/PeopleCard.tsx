@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
 import { Switch, Card, Avatar } from "react-native-paper";
-import { ImageBackground, Pressable } from "react-native";
+import { Dimensions, ImageBackground, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
 import { FontAwesome } from '@expo/vector-icons'; 
 import Colors from "../constants/Colors";
@@ -25,7 +25,7 @@ const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover }) => {
       }} 
       
       >
-        <Avatar.Image style={styles.avatar} size={84} source={cover ? { uri: cover } : { uri: "https://unsplash.com/s/photos/profile-pictures" }} />
+        <Avatar.Image style={styles.avatar} size={86} source={cover ? { uri: cover } : { uri: "https://unsplash.com/s/photos/profile-pictures" }} />
       </Link>
        </View> 
        <Text style={styles.title}>@{name}</Text>
@@ -34,12 +34,13 @@ const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover }) => {
   );
 };
 
+const screen = Dimensions.get("screen");
+
 const styles = StyleSheet.create({
   container: {
-    margin: 5,
     backgroundBlendMode: "darken",
     alignItems: "center",
-    
+     margin: screen.width * 0.04,
   },
   title: {
     fontSize: 12,

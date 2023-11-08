@@ -36,7 +36,7 @@ export default function NotifsScreen() {
             color: "white",
           },
           {
-            title: "James Rich",
+            title: "James fsfRich",
             subtitle: "has viewed your profile.",
             date: "2h ago",
             color: "white",
@@ -61,7 +61,7 @@ export default function NotifsScreen() {
             color: "white",
           },
           {
-            title: "Michale Rosu",
+            title: "Michale da",
             subtitle: "had viewed your profile",
             date: "2h ago",
             color: "white",

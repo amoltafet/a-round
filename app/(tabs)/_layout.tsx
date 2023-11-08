@@ -2,6 +2,8 @@ import { Link, Tabs, Navigator, useNavigation, router } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../../constants/Colors";
+import { Avatar } from "react-native-paper";
+import { View } from "../../components/Themed";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -35,6 +37,9 @@ export default function TabLayout() {
           paddingBottom: 10,
           paddingTop: 10,
           marginHorizontal: 40,
+          alignContent: "center",
+          justifyContent: "center",
+          
         },
         headerTitleStyle: {
           fontWeight: "500",
@@ -42,14 +47,13 @@ export default function TabLayout() {
         },
         headerShadowVisible: false,
        
-      
       }}
       
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "A-Round",
+          title: "",
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="at-circle" color={color} />
           ),
@@ -59,7 +63,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="messages"
         options={{
-          title: "Messages",
+          title: "",
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="chatbox-ellipses-outline" color={color} />
           ),
@@ -73,9 +77,31 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
-          tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
-          headerShown: false,
+          title: "",
+          tabBarIcon: ({ color }) => 
+          <View style={{marginBottom: -3,
+            borderWidth: 2,
+            borderColor: color,
+            shadowColor: "black",
+            shadowOffset: { width: 0, height: 1 },
+            shadowOpacity: 0.2,
+            elevation: 1,
+            borderRadius: 50,
+          }} >
+          <Avatar.Image  size={28} source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }} 
+    
+          /></View>,
+          headerLeft: () => (
+            <Pressable onPress={() => router.push("settings")} style={{marginLeft: 20}}>
+            <TabBarIcon name="settings-outline" color={Colors.primary.dark}  />
+            </Pressable>
+          ),
+          headerRight: () => (
+            // notifs
+            <Pressable onPress={() => router.push("notifs")} style={{marginRight: 20}}>
+            <TabBarIcon name="notifications-outline" color={Colors.primary.dark}  />
+            </Pressable>
+          ),
         }}
       />
     </Tabs>
