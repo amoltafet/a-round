@@ -22,7 +22,7 @@ export default function TabOneScreen() {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // variables
-  const snapPoints = useMemo(() => ["25%", "25%"], []);
+  const snapPoints = useMemo(() => ["30%", "30%"], []);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
@@ -59,7 +59,7 @@ export default function TabOneScreen() {
             title="See who poked you!"
             subTitle="80 pokes this week"
             icon="hand-left-outline"
-            link="messages"
+            link="login"
             border
           />
         </View>
