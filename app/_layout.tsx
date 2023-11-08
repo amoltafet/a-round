@@ -59,9 +59,11 @@ function RootLayoutNav() {
           headerStyle: {
             backgroundColor: Colors.secondary.main,
           },
+          headerShadowVisible: false,
           headerTintColor: "#000",
           headerTitleStyle: {
             fontWeight: "500",
+            fontSize: 20,
           },
           contentStyle: {
             backgroundColor: Colors.secondary.main,
@@ -76,6 +78,13 @@ function RootLayoutNav() {
             presentation: "modal",
             headerSearchBarOptions: {},
             title: "Search People Around You",
+          }}
+        />
+        <Stack.Screen
+          name="person"
+          options={{
+            presentation: "modal",
+            headerShown: false,
           }}
         />
         <Stack.Screen

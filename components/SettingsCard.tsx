@@ -12,6 +12,7 @@ interface SettingsCardProps {
   icon?: string;
   toggle?: boolean;
   link?: string | "[...missing]";
+  border?: boolean;
 }
 
 const SettingsCard: React.FC<SettingsCardProps> = ({
@@ -20,6 +21,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
   icon,
   toggle,
   link,
+  border,
 }) => {
   const [toggleState, setToggleState] = useState(false);
   const handleToggle = () => {
@@ -35,7 +37,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
         style={{
           flexDirection: "row",
           borderColor: "lightgrey",
-          borderWidth: 0.5,
+          borderWidth: border ? 0.5 : 0,
           borderRadius: 10,
           padding: 5,
           margin: 3,

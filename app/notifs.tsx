@@ -4,14 +4,16 @@ import { Text, View } from "../components/Themed";
 import { StatusBar } from "expo-status-bar";
 import NotificationCard from "../components/NotificationCard";
 import { FlatList } from "react-native-gesture-handler";
+import SettingsCard from "../components/SettingsCard";
 
 export default function NotifsScreen() {
   return (
     <View style={styles.container}>
-      <NotificationCard
-        title="Nudge requestes"
-        subtitle="Approve or ignore requests"
-        color="lightblue"
+      <SettingsCard
+        title="Nudge Requests"
+        subTitle="Approve or deny your nudge requests!"
+        icon="notifications-outline"
+        border
       />
       <View
         style={styles.separator}
@@ -20,14 +22,12 @@ export default function NotifsScreen() {
       />
       <Text style={styles.title}>Recent</Text>
       <FlatList
-        style={{ maxHeight: 180 }}
         data={[
           {
             title: "Sidiq Moltafet",
             subtitle: "has requested to nudge you.",
             date: "2h ago",
             color: "white",
-            
           },
           {
             title: "Hudson Burdick",
@@ -41,26 +41,6 @@ export default function NotifsScreen() {
             date: "2h ago",
             color: "white",
           },
-        ]}
-        renderItem={({ item }) => (
-          <View
-            style={{ marginBottom: 12 }}
-            lightColor="#eee"
-            darkColor="rgba(255,255,255,0.1)"
-          >
-            <NotificationCard
-              avatar={item.avatar}
-              title={item.title}
-              subtitle={item.subtitle}
-              date={item.date}
-              color={item.color}
-            />
-          </View>
-        )}
-        keyExtractor={(item) => item.title}
-      />
-      <FlatList
-        data={[
           {
             title: "Jesiica Rudoff",
             subtitle: "who you, might know, is on a-round",

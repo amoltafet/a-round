@@ -45,43 +45,51 @@ export default function TabOneScreen() {
 
   return (
     <BottomSheetModalProvider>
-
-     <View
+      <View
         style={{
           flex: 1,
           paddingTop: 50,
           backgroundColor: Colors.secondary.main,
         }}
       >
-
         <UserCard />
+        <View style={styles.statusBar}>
+          <SettingsCard
+            title="See who poked you!"
+            subTitle="80 pokes this week"
+            icon="hand-left-outline"
+            link="messages"
+            border
+          />
+        </View>
         <View style={styles.container}>
-          <View style={{ flexDirection: "row", marginBottom: 3 }}>
+          <View style={{ flexDirection: "row", marginBottom: 15 }}>
             <Text
               style={{
                 fontSize: 20,
                 fontWeight: "400",
                 marginLeft: 10,
-                marginTop: 15,
+                marginTop: 10,
                 flex: 1,
               }}
             >
               People Nearby
             </Text>
+            
             <View
               style={{
                 padding: 1,
                 borderRadius: 15,
-                backgroundColor: Colors.secondary.main,
+                backgroundColor: Colors.primary.main,
                 borderWidth: 1,
-                borderColor: "lightgrey",
+                borderColor: Colors.primary.main,
                 marginRight: 5,
               }}
             >
               <Ionicons
                 name="apps-outline"
-                size={18}
-                color={Colors.primary.main}
+                size={12}
+                color={Colors.secondary.main}
                 style={{ margin: 10 }}
               />
             </View>
@@ -92,13 +100,13 @@ export default function TabOneScreen() {
                 borderRadius: 15,
                 backgroundColor: Colors.secondary.main,
                 borderWidth: 1,
-                borderColor: "lightgrey",
+                borderColor: Colors.primary.main,
                 marginRight: 10,
               }}
             >
               <Ionicons
                 name="reorder-four-outline"
-                size={18}
+                size={12}
                 color={Colors.primary.main}
                 style={{ margin: 10 }}
               />
@@ -106,19 +114,19 @@ export default function TabOneScreen() {
           </View>
 
           <FlatList
-            numColumns={2}
+            numColumns={4}
             key={"_"}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             shouldCancelWhenOutside={true}
             data={[
               {
-                key: "Devin Jake",
+                key: "Devin ",
                 cover:
                   "https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/06/15/Chris-Pratt.jpg",
               },
               { key: "Dan", cover: "https://picsum.photos/300" },
-              { cover: "https://picsum.photos/300" },
+              { key: "Jakon", cover: "https://picsum.photos/300" },
               { key: "Jackson", cover: "https://picsum.photos/300" },
               { key: "James", cover: "https://picsum.photos/300" },
               { key: "Joel" },
@@ -130,45 +138,48 @@ export default function TabOneScreen() {
             renderItem={({ item }) => (
               <PeopleCard
                 name={item.key}
-                bio="I am a software engineer"
-                job="Software Engineer"
                 cover={item.cover}
               />
             )}
-            style={{ flex: 1 }}
           />
         </View>
         <View style={styles.filterButton}>
           <Pressable onPress={handlePresentModalPress}>
-            <Ionicons name="eye-outline" size={36} color={Colors.secondary.main} />
+            <Ionicons
+              name="eye-outline"
+              size={36}
+              color={Colors.secondary.main}
+            />
           </Pressable>
-        </View>       
-     </View>
+        </View>
+      </View>
 
-     
-     <BottomSheetModal
-          ref={bottomSheetModalRef}
-          index={1}
-          snapPoints={snapPoints}
-          onChange={handleSheetChanges}
-          backdropComponent={renderBackdrop}
-        >
-          <View style={{ flex: 1, padding: 10 }}>
-            <Text style={styles.title}>Visibility Settings</Text>
-              <SettingsCard
-              title="Visibility"
-              subTitle="Turn on visibility to see people around you"
-              icon="eye-outline"
-              toggle
-            />
-            <SettingsCard
-              title="More Settings"
-              icon="settings-outline"
-              subTitle="Manage all your settings"
-              link="settings"
-            />
-          </View>
-        </BottomSheetModal>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+        backdropComponent={renderBackdrop}
+      >
+        <View style={{ flex: 1, padding: 10 }}>
+          <Text style={styles.title}>Visibility Settings</Text>
+          <SettingsCard
+            title="Visibility"
+            subTitle="Turn on visibility to see people around you"
+            icon="eye-outline"
+            toggle
+          />
+          <SettingsCard
+            title="More Settings"
+            icon="settings-outline"
+            subTitle="Manage all your settings"
+            link="settings"
+            border
+          />
+        </View>
+      </BottomSheetModal>
+
+      
     </BottomSheetModalProvider>
   );
 }
@@ -177,16 +188,10 @@ function UserCard() {
   return (
     <View style={{ flexDirection: "row", margin: 5, justifyContent: "center" }}>
       <View style={{ flex: 1, flexDirection: "row" }}>
-        <View style={styles.statusCard}>
-          <Text style={{ color: Colors.primary.main, fontSize: 18 }}>42</Text>
-          <Text style={{ color: Colors.primary.main }}>People</Text>
-        </View>
-        <View style={styles.statusCard}>
-          <Text style={{ color: Colors.primary.main, fontSize: 18 }}>4</Text>
-          <Text style={{ color: Colors.primary.main }}>Connections </Text>
-        </View>
+          <Text style={{ color: Colors.primary.main, fontSize
+          : 28, fontWeight: "700", paddingLeft: 20, paddingTop: 30,
+          }}>IceBreaker.</Text>
       </View>
-
       <Pressable
         onPress={() => router.push("settings")}
         style={{
@@ -198,10 +203,12 @@ function UserCard() {
           borderColor: "lightgrey",
           borderRadius: 50,
           padding: 5,
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.primary.main,
+          
         }}
+        
       >
-        <Ionicons name="color-wand-outline" size={32} color="white" />
+        <Ionicons name="information-outline" size={32} color="white" />
       </Pressable>
 
       <Pressable
@@ -211,7 +218,7 @@ function UserCard() {
           marginRight: 20,
           marginBottom: 20,
           borderWidth: 1,
-          borderColor: "lightgrey",
+          borderColor: Colors.primary.main,
           borderRadius: 50,
           padding: 5,
         }}
@@ -234,28 +241,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   statusBar: {
-    flexDirection: "row",
-    marginTop: 5,
-  },
-  statusCard: {
-    backgroundColor: Colors.secondary.main,
-    borderWidth: 1,
-    borderColor: Colors.secondary.main,
-    shadowColor: Colors.primary.main,
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    borderRadius: 10,
-    padding: 15,
-    marginLeft: 8,
-    marginRight: 8,
-    marginTop: 15,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingRight: 10,
+    paddingLeft: 10,
+    paddingBottom: 10,
+
+    
   },
   filterButton: {
     position: "absolute",
@@ -265,5 +255,4 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
   },
-
 });

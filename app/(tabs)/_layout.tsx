@@ -1,4 +1,4 @@
-import { Link, Tabs, Navigator, useNavigation } from "expo-router";
+import { Link, Tabs, Navigator, useNavigation, router } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../../constants/Colors";
@@ -22,7 +22,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tabIconDefault,
         tabBarStyle: {
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.secondary.main,
           borderWidth: 1,
           borderColor: "lightgrey",
           shadowColor: "black",
@@ -31,25 +31,21 @@ export default function TabLayout() {
           elevation: 1,
           borderRadius: 50,
           height: 60,
-          marginBottom: 15,
+          marginBottom: 20,
           paddingBottom: 10,
           paddingTop: 10,
-          marginHorizontal: 30,
+          marginHorizontal: 40,
         },
-
+        headerTitleStyle: {
+          fontWeight: "500",
+          fontSize: 20,
+        },
+        headerShadowVisible: false,
+       
+      
       }}
       
     >
-      <Tabs.Screen
-        name="messages"
-        options={{
-          headerShown: false,
-          title: "Inbox",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="chatbox-ellipses-outline" color={color} />
-          ),
-        }}
-      />
       <Tabs.Screen
         name="index"
         options={{
@@ -58,6 +54,20 @@ export default function TabLayout() {
             <TabBarIcon name="at-circle" color={color} />
           ),
           headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="messages"
+        options={{
+          title: "Messages",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="chatbox-ellipses-outline" color={color} />
+          ),
+          headerRight: () => (
+            <Pressable onPress={() => router.push("search")} style={{marginRight: 20}}>
+            <TabBarIcon name="chatbox-ellipses" color={Colors.primary.main}  />
+            </Pressable>
+          ),
         }}
       />
       <Tabs.Screen

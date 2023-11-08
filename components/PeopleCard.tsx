@@ -1,75 +1,70 @@
 import React, { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
-import { Switch, Card } from "react-native-paper";
-import { ImageBackground } from "react-native";
+import { Switch, Card, Avatar } from "react-native-paper";
+import { ImageBackground, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
 import { FontAwesome } from '@expo/vector-icons'; 
-
+import Colors from "../constants/Colors";
+import { router, Link } from "expo-router";
 
 interface SettingsCardProps {
   name?: string;
   cover?: String;
-  bio?: string;
-  job?: string;
 }
 
-const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover, bio, job }) => {
+const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover }) => {
+  const userName = name ? name : "No User Found";
   return (
-   
+ 
     <View style={styles.container}>
-      <Card style={{ flex: 1 }}>
-        <Card.Cover
-          source={cover ? { uri: cover } : { uri: "https://picsum.photos/700" }}
-          style={{ height: 100 }}
-        />
-        <View style={styles.info}>
-          <Text style={styles.title}>{name}</Text>
-          <Text style={styles.text}>{bio}</Text>
-        </View>
-        <View style={styles.pokeIcon}>
-          <FontAwesome name="hand-o-up" size={24} color="white" />
-        </View>
-      </Card>
+      
+      <View style={styles.border}>  
+      <Link href={{ pathname: "/person", params: { user: userName } }} style={{
+        marginTop: 3.5,
+      }} 
+      
+      >
+        <Avatar.Image style={styles.avatar} size={84} source={cover ? { uri: cover } : { uri: "https://unsplash.com/s/photos/profile-pictures" }} />
+      </Link>
+       </View> 
+       <Text style={styles.title}>@{name}</Text>
     </View>
+
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
-    borderColor: "lightgrey",
-    borderWidth: 1,
-    borderRadius: 15,
-    margin: 10,
-    width: "45%",
+    margin: 5,
     backgroundBlendMode: "darken",
-  },
-  text: {
-    color: "white",
+    alignItems: "center",
+    
   },
   title: {
-    fontSize: 15,
-    fontWeight: "bold",
-    color: "white",
+    fontSize: 12,
+    fontWeight: "400",
+    marginTop: 5,
   },
-
-  info: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    backgroundColor: "rgba(0,0,0,0.5)",
-    borderRadius: 15,
-    padding: 10,
+  avatar: {
+    justifyContent: "center",
+    alignItems: "center",
   },
-  pokeIcon: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    padding: 10,
+  border: {
+    borderWidth: 4,
+    borderColor: Colors.secondary.main,
+    shadowColor: "black",
+    shadowOpacity: 0.5,
+    backgroundColor: "lightgrey",
     borderRadius: 50,
-  },
+    shadowRadius: 3,
+    shadowOffset: {
+      height: 1,
+      width: 1,
+    },
+  }
+
+  
 });
 
 export default PeopleCard;

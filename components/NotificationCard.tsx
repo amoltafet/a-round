@@ -10,7 +10,6 @@ interface NotificationCardProps {
   subtitle: string;
   date?: string;
   color?: string;
-  name?: string;
 }
 
 export default function NotificationCard({
@@ -19,24 +18,20 @@ export default function NotificationCard({
   subtitle,
   date,
   color,
-  name,
 }: NotificationCardProps): JSX.Element {
   return (
     <View
       style={{
         flexDirection: "row",
-        borderColor: "white",
-        borderWidth: 1,
-        borderRadius: 10,
         backgroundColor: color,
       }}
     >
         {avatar ? (
-      <Avatar.Text size={24} label={avatar} style={{ margin: 12 }} />
+      <Avatar.Text size={42} label={avatar} style={{ margin: 12 }} />
     ) : (
-        <Avatar.Text size={24} label="XD" style={{ margin: 10 }} />
+        <Avatar.Text size={42} label="XD" style={{ margin: 10 }} />
     )}
-      <View style={{ flex: 1, margin: 5.5, backgroundColor: color }}>      
+      <View style={{ flex: 1, marginTop: 15, backgroundColor: color }}>      
         <Text style={{ fontSize: 15, fontWeight: "bold" }}>{title}</Text>
         <Text style={{ fontSize: 12, color: "black" }}>{subtitle}</Text>
       </View>
