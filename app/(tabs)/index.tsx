@@ -5,7 +5,7 @@ import { Text, View } from "../../components/Themed";
 import PeopleCard from "../../components/PeopleCard";
 import { Avatar, Chip } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import {  ScrollView } from "react-native-gesture-handler";
 import { Link, router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
@@ -54,17 +54,49 @@ export default function TabOneScreen() {
         }}
       >
         <UserCard />
+        <View style={{ flexDirection: "row", margin: 10, gap: 20 }}>
+            <View style={{ justifyContent: "center", alignItems: "center", backgroundColor: Colors.primary.main,
+            borderWidth: 3, borderColor: Colors.primary.third, borderRadius: 15, padding: 10, flex: 1 }}>
+              <Ionicons name="time" size={38} color={Colors.primary.secondary} />
+              <Text style={{ fontSize: 14, fontWeight: "400", color: "white" }}>Time
+              </Text>
+            </View>
+            <View style={{ justifyContent: "center", alignItems: "center", backgroundColor: Colors.primary.main,
+            borderWidth: 3, borderColor: Colors.primary.third,  borderRadius: 15, padding: 10, flex:1 }}>
+              <Ionicons name="tennisball" size={38} color="white" />
+              <Text style={{ fontSize: 14, fontWeight: "400", color: "white" }}>Activity
+              </Text>
+            </View>
+            <View style={{ justifyContent: "center", alignItems: "center", backgroundColor: Colors.primary.main,
+            borderWidth: 3, borderColor: Colors.primary.third,  borderRadius: 15, padding: 10, flex:1 }}>
+              <Ionicons name="share" size={38} color="white" />
+              <Text style={{ fontSize: 14, fontWeight: "400", color: "white" }}>
+                Share
+              </Text>
+            </View>
+            <View style={{ justifyContent: "center", alignItems: "center", backgroundColor: Colors.primary.main,
+            borderWidth: 3, borderColor: Colors.primary.third,  borderRadius: 15, padding: 10, flex:1 }}>
+              <Ionicons name="information" size={38} color="white" />
+              <Text style={{ fontSize: 14, fontWeight: "400", color: "white" }}>
+                Info
+              </Text>
+            </View>
+        </View>
+
         <View style={styles.statusBar}>
           <SettingsCard
             title="See who poked you!"
             subTitle="80 pokes this week"
             icon="hand-left-outline"
-            link="login"
+            link="connections"
             border
           />
         </View>
+      
         <View style={styles.container}>
-          <View style={{ flexDirection: "row", marginBottom: 15 }}>
+          <View style={{ flexDirection: "row", marginBottom: 15,
+          backgroundColor: Colors.primary.main,
+        }}>
             <Text
               style={{
                 fontSize: 20,
@@ -72,6 +104,7 @@ export default function TabOneScreen() {
                 marginLeft: 10,
                 marginTop: 10,
                 flex: 1,
+                color: Colors.secondary.main,
               }}
             >
               People Near You
@@ -99,7 +132,8 @@ export default function TabOneScreen() {
               style={{
                 flexDirection: "row",
                 flexWrap: "wrap",
-                justifyContent: "center",
+                backgroundColor: Colors.primary.main,
+                flex: 1,
               }}
             >
               {mockUsers.map((user) => (
@@ -109,6 +143,10 @@ export default function TabOneScreen() {
                   cover={user.avatar}
                 />
               ))}
+              <PeopleCard
+                name="22 Hidden"
+                cover="https://img.freepik.com/premium-vector/unknown-person-hidden-identity-icon-line_116137-5748.jpg"
+              />
             </View>
           </ScrollView>
         </View>
@@ -117,7 +155,7 @@ export default function TabOneScreen() {
             <Ionicons
               name="eye-outline"
               size={36}
-              color={Colors.secondary.main}
+              color={Colors.primary.main}
             />
           </Pressable>
         </View>
@@ -141,7 +179,7 @@ export default function TabOneScreen() {
           <SettingsCard
             title="More Settings"
             icon="settings-outline"
-            subTitle="Manage all your settings"
+            subTitle="Manage all your settings and privacy"
             link="settings"
             border
           />
@@ -154,49 +192,32 @@ export default function TabOneScreen() {
 function UserCard() {
   return (
     <View style={{ flexDirection: "row", margin: 5, justifyContent: "center" }}>
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <Text
-          style={{
-            color: Colors.primary.main,
-            fontSize: 28,
-            fontWeight: "700",
-            paddingLeft: 20,
-            paddingTop: 30,
-          }}
-        >
-          IceBreaker.
-        </Text>
+      <View style={{ flex: 1, flexDirection: "row", padding: 10 }}>
+        <View>
+          <Text style={{ fontSize: 16, fontWeight: "400", color: "grey" }}>
+            Location
+          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Ionicons name="location" size={18} color={Colors.primary.main} />
+            <Text style={{ fontSize: 19, fontWeight: "500" }}> EastSide Bar, Seattle</Text>
+          </View>
+        </View>
       </View>
-      <Pressable
-        onPress={() => router.push("settings")}
-        style={{
-          marginTop: 20,
-          marginLeft: 20,
-          marginBottom: 20,
-          marginRight: 10,
-          borderWidth: 1,
-          borderColor: "lightgrey",
-          borderRadius: 50,
-          padding: 5,
-          backgroundColor: Colors.primary.main,
-        }}
-      >
-        <Ionicons name="information-outline" size={32} color="white" />
-      </Pressable>
 
       <Pressable
         onPress={() => router.push("search")}
         style={{
           marginTop: 20,
           marginRight: 20,
-          marginBottom: 20,
-          borderWidth: 1,
-          borderColor: Colors.primary.main,
+          marginBottom: 10,
+          borderWidth: 3,
+          borderColor: Colors.primary.third, 
           borderRadius: 50,
           padding: 5,
+          backgroundColor: Colors.primary.main,
         }}
       >
-        <Ionicons name="search-outline" size={32} color={Colors.primary.main} />
+        <Ionicons name="search-outline" size={22} color={Colors.secondary.main} />
       </Pressable>
     </View>
   );
@@ -206,6 +227,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 5,
+    backgroundColor: Colors.primary.main,
+    borderRadius: 20,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopWidth: 3, 
+    borderColor: Colors.primary.third, 
   },
   title: {
     fontSize: 18,
@@ -222,8 +249,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 10,
     left: 10,
-    backgroundColor: Colors.primary.main,
+    backgroundColor: Colors.secondary.main,
     padding: 10,
     borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    borderWidth: 3, 
+    borderColor: Colors.primary.third, 
   },
 });

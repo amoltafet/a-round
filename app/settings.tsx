@@ -6,7 +6,7 @@ export default function ModalScreen() {
   return (
     <View style={styles.container}>
        <Text style={styles.title}>ACCOUNT</Text>
-       <SettingsCard title="Edit Profile" subTitle='Change your profile details' icon="person-outline" link='editProfile'/>
+       <SettingsCard title="Blocked Users" subTitle='Manage your blocked users' icon="person-remove-outline" link='blockedUsers' />
        <SettingsCard title="Privacy" subTitle='Manage your privacy settings' icon="lock-closed-outline" link='privacy' />
         <SettingsCard title="Security" subTitle='Manage your security settings' icon="shield-checkmark-outline" link='security'/>
         <SettingsCard title="Notifications" subTitle='Manage your notifications' icon="notifications-outline" link='notifSettings'/>

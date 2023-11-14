@@ -30,8 +30,12 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
 
   return (
     <Pressable
-      onPress={() => router.push(link)}
-      style={{ backgroundColor: Colors.secondary.main }}
+      onPress={() => {
+        if (link) {
+          router.push(link);
+        } 
+      } }
+      style={{ backgroundColor: Colors.secondary.text }}
     >
       <View
         style={{
@@ -41,10 +45,11 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
           borderRadius: 10,
           padding: 5,
           margin: 3,
+          backgroundColor: Colors.primary.text,
         }}
       >
         <Ionicons name={icon} size={26} color={Colors.primary.dark} style={{ margin: 10 }} />
-        <View style={{ flex: 1, margin: 5 }}>
+        <View style={{ flex: 1, margin: 5, backgroundColor: Colors.primary.text }}>
           <Text style={{ fontSize: 19, fontWeight: "500" }}>{title}</Text>
           <Text style={{ fontSize: 12, color: "grey" }}>{subTitle}</Text>
         </View>
@@ -53,6 +58,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
             value={toggleState}
             onValueChange={handleToggle}
             style={{ margin: 10 }}
+            color={Colors.primary.dark}
           />
         ) : (
           <Ionicons

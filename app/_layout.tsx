@@ -5,11 +5,12 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack, router } from "expo-router";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { Pressable, useColorScheme } from "react-native";
 import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -54,52 +55,39 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack
-        initialRouteName="splash"
+        initialRouteName="(tabs)/messages"
         screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors.secondary.main,
-          },
+          headerStyle: { backgroundColor: Colors.secondary.main },
           headerShadowVisible: false,
           headerTintColor: "#000",
-          headerTitleStyle: {
-            fontWeight: "500",
-            fontSize: 20,
-          },
-          contentStyle: {
-            backgroundColor: Colors.secondary.main,
-          },
-        }}
-      >
+          headerTitleStyle: { fontWeight: "500", fontSize: 20 },
+          contentStyle: { backgroundColor: Colors.secondary.main },
+        }}>
+
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(settingsTabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="chat" options={{ title: "Chat" }} />
+
         <Stack.Screen
           name="search"
           options={{
             presentation: "modal",
-            headerSearchBarOptions: {},
-            title: "Search People Around You",
+            title: "",
           }}
         />
-        <Stack.Screen
-          name="person"
-          options={{
-            presentation: "modal",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="settings"
-          options={{
-            title: "Settings & Privacy",
-          }}
-        />
-        <Stack.Screen
-          name="notifs"
-          options={{
-            title: "Notifications",
-          }}
-        />
+        <Stack.Screen name="person" options={{ title: "",
+          headerRight: () => (
+            <Pressable
+              onPress={() => router.push("chat")}
+            >
+              <Ionicons name="ellipsis-vertical" size={24} color="black" />
+            </Pressable>
+          ), }} />
+       
+        <Stack.Screen name="settings" options={{title: "Settings & Privacy"}}/>
+        <Stack.Screen name="notifs" options={{title: "Notifications" }}/>
+        <Stack.Screen name="connections" options={{presentation: "modal", headerShown: false }}/>
       </Stack>
     </ThemeProvider>
   );

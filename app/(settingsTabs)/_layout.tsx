@@ -18,7 +18,15 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Stack>
+    <Stack 
+    screenOptions={{
+      headerStyle: { backgroundColor: Colors.secondary.main },
+      headerShadowVisible: false,
+      headerTintColor: "#000",
+      headerTitleStyle: { fontWeight: "500", fontSize: 20 },
+      contentStyle: { backgroundColor: Colors.secondary.main },
+    }}
+    >
       <Stack.Screen
         name="editProfile"
         options={{

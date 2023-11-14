@@ -10,10 +10,11 @@ export default function NotifsScreen() {
   return (
     <View style={styles.container}>
       <SettingsCard
-        title="Nudge Requests"
-        subTitle="Approve or deny your nudge requests!"
+        title="Poked Requests"
+        subTitle="Approve or deny your poke requests!"
         icon="notifications-outline"
         border
+        link="/connections"
       />
       <View
         style={styles.separator}

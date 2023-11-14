@@ -1,71 +1,91 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "../components/Themed";
-import { Switch, Card, Avatar } from "react-native-paper";
-import { Dimensions, ImageBackground, Pressable } from "react-native";
+import { Switch, Card } from "react-native-paper";
+import { Avatar } from "react-native-elements";
+import { Animated, Dimensions, ImageBackground, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
-import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import { router, Link } from "expo-router";
+import mockUsers from "../app/mock/MockData";
 
-interface SettingsCardProps {
+interface PeopleCardProps {
   name?: string;
-  cover?: String;
+  cover?: uri | "[...missing]";
 }
 
-const PeopleCard: React.FC<SettingsCardProps> = ({ name, cover }) => {
+const PeopleCard: React.FC<PeopleCardProps> = ({ name, cover }) => {
   const userName = name ? name : "No User Found";
-  return (
- 
-    <View style={styles.container}>
-      
-      <View style={styles.border}>  
-      <Link href={{ pathname: "/person", params: { user: userName } }} style={{
-        marginTop: 3.5,
-      }} 
-      
-      >
-        <Avatar.Image style={styles.avatar} size={86} source={cover ? { uri: cover } : { uri: "https://unsplash.com/s/photos/profile-pictures" }} />
-      </Link>
-       </View> 
-       <Text style={styles.title}>@{name}</Text>
-    </View>
+  const screen = Dimensions.get("screen");
+  // make connected happen out 1/10 times
+  const connected = userName == mockUsers[0].username || userName == mockUsers[5].username || userName == mockUsers[7].username;
+  const poked = Math.random() < 0.2;
+  const [color, setColor] = useState("red");
 
+ 
+
+ 
+  const styles = StyleSheet.create({
+    container: {
+      backgroundBlendMode: "darken",
+      alignItems: "center",
+      width: "auto",
+      height: "auto",
+      margin: 7,
+    },
+    title: {
+      fontSize: 12,
+      fontWeight: "400",
+      marginTop: 5,
+      color: "white",
+    },
+    
+    border: {
+      borderWidth: 1,
+      // change border color every 100 ms
+      borderColor: poked ? color : "white",
+      shadowColor: "black",
+      shadowOpacity: 0.3,
+      backgroundColor: "lightgrey",
+      borderRadius: 50,
+      shadowRadius: 3,
+      shadowOffset: {
+        height: 1,
+        width: 1,
+      },
+    },
+  });
+  return (
+    <Link href={{ pathname: "/person", params: { user: name } }} asChild>
+      <Pressable style={styles.container}>
+        <View style={styles.border}>
+          <Avatar
+            rounded
+            size={ screen.width / 5 }
+            source={{ uri: cover }}
+          > 
+          {connected && (
+            <Avatar.Accessory
+              size={20}
+              style={{ backgroundColor: "green" }}
+              iconProps={{
+                name: "check",
+                color: "white",
+              }}
+            />
+          )  
+          }
+
+          </Avatar>
+        </View>         
+         <Text style={styles.title}>{name}</Text>
+      </Pressable>
+    </Link>
   );
 };
 
-const screen = Dimensions.get("screen");
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundBlendMode: "darken",
-    alignItems: "center",
-     margin: screen.width * 0.04,
-  },
-  title: {
-    fontSize: 12,
-    fontWeight: "400",
-    marginTop: 5,
-  },
-  avatar: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  border: {
-    borderWidth: 4,
-    borderColor: Colors.secondary.main,
-    shadowColor: "black",
-    shadowOpacity: 0.5,
-    backgroundColor: "lightgrey",
-    borderRadius: 50,
-    shadowRadius: 3,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-  }
 
-  
-});
 
 export default PeopleCard;

@@ -8,6 +8,49 @@ type User = {
     connections: number;
 };
 
+type MainUser = {
+    id: number;
+    name: string;
+    email: string;
+    username: string;
+    avatar: string;
+    connections: MainUser[];
+    pokes: MainUser[];
+    requests: MainUser[];
+    messages: Message[];
+    images: string[3];
+    socials: string[3];
+    privateProfile: boolean | true;
+    visibility: boolean | true;
+    moreInformation: {
+        relationshipStatus: string;
+        interests: string[];
+        bio: string;
+        school: string;
+        work: string;
+    }
+    groups: string[];
+    notifications: Notification[];
+    blocked: MainUser[];
+    
+};
+
+type Message = {
+    id: number;
+    sender: MainUser;
+    receiver: MainUser;
+    content: string;
+    time: string;
+};
+
+type Notification = {
+    id: number;
+    title: string;
+    content: string;
+    time: string;
+    read: boolean;
+};
+
 const mockUsers: User[] = [
     {
         id: 1,
@@ -36,15 +79,25 @@ const mockUsers: User[] = [
 ];
 
 
+const randomString = (length: number) => {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
+
 for (let i = 4; i <= 22; i++) {
-    mockUsers.push({
-        id: i,
-        name: `User ${i}`,
-        email: `user${i}@example.com`,
-        username: `user${i}`,
-        avatar: `https://randomuser.me/api/portraits/men/${i}.jpg`,
-        connections: Math.floor(Math.random() * 1000),
-    });
+        const randomChars = randomString(5);
+        mockUsers.push({
+                id: i,
+                name: `User ${i} ${randomChars}`,
+                email: `user${i}${randomChars}@example.com`,
+                username: `user${i}${randomChars}`,
+                avatar: `https://randomuser.me/api/portraits/men/${i}.jpg`,
+                connections: Math.floor(Math.random() * 1000),
+        });
 }
 
 export default mockUsers;

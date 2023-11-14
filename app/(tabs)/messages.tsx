@@ -8,6 +8,8 @@ import Colors from '../../constants/Colors';
 import { Chip, Searchbar } from 'react-native-paper';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import Chat from '../../components/Chat';
+import UserCard from '../../components/UserCard';
 
 export default function Messages() {
   return (
@@ -27,6 +29,10 @@ export default function Messages() {
       </Pressable>
       <Ionicons name='filter' size={24} color={Colors.primary.main} style={{margin: 15}}/>
       </View>
+        <UserCard name='Josh Makes' username='@joshmakes' avatar='https://randomuser.me/api/portraits/women/2.jpg' chat />
+        <UserCard name='USer Makes' username='@joshmwafsakes' avatar='https://pbs.twimg.com/profile_images/1350895249678348292/RS1Aa0iK_400x400.jpg' chat />
+        <UserCard name='Mfas Makes' username='@sfsfsfa' avatar='https://pbs.twimg.com/profile_images/1350895249678348292/RS1Aa0iK_400x400.jpg' chat />
+
     </View>
   );
 }

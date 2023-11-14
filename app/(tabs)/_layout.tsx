@@ -2,8 +2,8 @@ import { Link, Tabs, Navigator, useNavigation, router } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../../constants/Colors";
-import { Avatar } from "react-native-paper";
-import { View } from "../../components/Themed";
+import { Avatar, Badge, IconButton } from "react-native-paper";
+import { View, Text } from "../../components/Themed";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -12,12 +12,12 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
 }) {
-  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={32} style={{ marginBottom: 0 }} {...props} />;
 }
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  
+
   return (
     <Tabs
       screenOptions={{
@@ -27,28 +27,19 @@ export default function TabLayout() {
           backgroundColor: Colors.secondary.main,
           borderWidth: 1,
           borderColor: "lightgrey",
-          shadowColor: "black",
-          shadowOffset: { width: 0, height: 1 },
-          shadowOpacity: 0.2,
-          elevation: 1,
-          borderRadius: 50,
-          height: 60,
-          marginBottom: 20,
-          paddingBottom: 10,
-          paddingTop: 10,
-          marginHorizontal: 40,
+          
+          borderRadius: 10,
+          height: 80,
+          paddingBottom: 5,
           alignContent: "center",
           justifyContent: "center",
-          
         },
         headerTitleStyle: {
           fontWeight: "500",
           fontSize: 20,
         },
         headerShadowVisible: false,
-       
       }}
-      
     >
       <Tabs.Screen
         name="index"
@@ -58,6 +49,16 @@ export default function TabLayout() {
             <TabBarIcon name="at-circle" color={color} />
           ),
           headerShown: false,
+          tabBarStyle: {
+            
+            borderColor: Colors.primary.main,
+            borderWidth: 0,
+            height: 80,
+            
+            
+            paddingBottom: 5,
+            
+          },
         }}
       />
       <Tabs.Screen
@@ -68,9 +69,17 @@ export default function TabLayout() {
             <TabBarIcon name="chatbox-ellipses-outline" color={color} />
           ),
           headerRight: () => (
-            <Pressable onPress={() => router.push("search")} style={{marginRight: 20}}>
-            <TabBarIcon name="chatbox-ellipses" color={Colors.primary.main}  />
+            <Pressable
+              onPress={() => router.push("search")}
+              style={{ marginRight: 20 }}
+            >
+              <TabBarIcon name="chatbox-ellipses" color={Colors.primary.main} />
             </Pressable>
+          ),
+          headerLeft: () => (
+            <Text style={{ marginLeft: 20, fontSize: 20, fontWeight: "500" }}>
+              Your Inbox
+            </Text>
           ),
         }}
       />
@@ -78,29 +87,42 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "",
-          tabBarIcon: ({ color }) => 
-          <View style={{marginBottom: -3,
-            borderWidth: 2,
-            borderColor: color,
-            shadowColor: "black",
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.2,
-            elevation: 1,
-            borderRadius: 50,
-          }} >
-          <Avatar.Image  size={28} source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }} 
-    
-          /></View>,
+          tabBarIcon: ({ color }) => (
+            <View
+              style={{
+                marginBottom: -3,
+                borderWidth: 3,
+                borderColor: color,
+                shadowColor: "black",
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.2,
+                elevation: 1,
+                borderRadius: 50,
+              }}
+            >
+              <Avatar.Image
+                size={28}
+                source={{
+                  uri: "https://randomuser.me/api/portraits/men/1.jpg",
+                }}
+              />
+            </View>
+          ),
           headerLeft: () => (
-            <Pressable onPress={() => router.push("settings")} style={{marginLeft: 20}}>
-            <TabBarIcon name="settings-outline" color={Colors.primary.dark}  />
-            </Pressable>
+            <IconButton
+              icon="cog-outline"
+              size={28}
+              style={{ marginLeft: 20 }}
+              onPress={() => router.push("settings")}
+            />
           ),
           headerRight: () => (
-            // notifs
-            <Pressable onPress={() => router.push("notifs")} style={{marginRight: 20}}>
-            <TabBarIcon name="notifications-outline" color={Colors.primary.dark}  />
-            </Pressable>
+            <IconButton
+              icon="bell-outline"
+              size={28}
+              style={{ marginRight: 20 }}
+              onPress={() => router.push("notifs")}
+            />
           ),
         }}
       />
