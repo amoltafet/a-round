@@ -6,54 +6,64 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import UserCard from "./UserCard";
 import SettingsCard from "./SettingsCard";
 import { ScrollView } from "react-native-gesture-handler";
+import { Image } from "react-native-elements";
+import { Avatar } from "react-native-paper";
 
 export default function ProfileTabs() {
-  const [activeIndex, setActiveIndex] = React.useState(0);
-
-  const FirstRoute = () => (
+    
+  const SpotifyCarousel = () => (
     <View>
-    <View style={{ flexDirection: "row", gap: 8, paddingTop: 10 }}>
-      <Card
-        style={{
-          flex: 1,
-          borderWidth: 1,
-          borderColor: Colors.secondary.main,
-        }}
-      >
-        <Card.Cover source={{ uri: "https://picsum.photos/300" }} />
-      </Card>
-      <Card
-        style={{
-          flex: 1,
-          borderWidth: 1,
-          borderColor: Colors.secondary.main,
-        }}
-      >
-        <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-      </Card>
-      <Card
-        style={{
-          flex: 1,
-          borderWidth: 1,
-          borderColor: Colors.secondary.main,
-        }}
-      >
-        <Card.Cover source={{ uri: "https://picsum.photos/400" }} />
-      </Card>
-    </View>
+    <ScrollView style={{  gap: 8, paddingTop: 10, paddingBottom: 10 }} horizontal={true} showsHorizontalScrollIndicator={false}>
+      <View style={{ alignItems: "center", marginRight: 10 }}>
+        <Image source={{ uri: "https://pub-static.fotor.com/assets/projects/pages/c7d9749a29fc44a5a54da2bba21165af/gradient-cool-new-bullet-e52b9cac8825471981dc12dd343176da.jpg" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
+        <View style={{ flexDirection: "row", alignItems: "start", marginTop: 5 }}>
+        <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
+        <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>The Weeknd</Text>
+        </View>
+      </View>
+      <View style={{ alignItems: "center", marginRight: 10 }}>
+        <Image source={{ uri: "https://i.scdn.co/image/ab67616d00001e02c9a1ac950b093bcc0066e450" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
+        <View style={{ flexDirection: "row", alignItems: "start", marginTop: 5 }}>
+        <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
+        <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>My love play</Text>
+         </View>
+        </View>
+      <View style={{ alignItems: "center", marginRight: 10 }}>
+        <Image source={{ uri: "https://www.befunky.com/images/wp/wp-2020-12-final-cover-1.jpg?auto=avif,webp&format=jpg&width=944" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
+        <View style={{ flexDirection: "row", alignItems: "start", marginTop: 5 }}>
+        <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
+        <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>Rainy Day</Text>
+        </View>     
+         </View>
+  
+    </ScrollView>
     </View>
   );
 
   const SecondRoute = () => (
-    <ScrollView showsHorizontalScrollIndicator={false} 
-     
-    >
-      <View>
-        <Text style={styles.text}>Relationship Status </Text>
-        <Chip icon="heart" style={{ marginRight: "auto" }}>
+    <View >
+      <ScrollView 
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      style={{
+        marginBottom: 10, marginTop: 10, gap: 10, borderWidth: 0.5, borderColor: "grey", borderRadius: 10, padding: 10
+      }}>
+        <Chip icon="heart" style={{margin: 1}}>
           Single
         </Chip>
-      </View>
+        <Chip icon="heart" style={{margin: 1}}>
+          Single
+        </Chip>
+        <Chip icon="heart" style={{margin: 1}}>
+          Single
+        </Chip>
+        <Chip icon="heart" style={{margin: 1}}>
+          Single
+        </Chip>
+        <Chip icon="heart" style={{margin: 1}}>
+          Single
+        </Chip>
+      </ScrollView>
       <View style={styles.separator} />
       <View style={{ flexDirection: "row", marginBottom: 10 }}>
         <Ionicons
@@ -97,95 +107,34 @@ export default function ProfileTabs() {
           Snowboarding
         </Chip>
       </View>
-    </ScrollView>
+    </View>
   );
 
   const ThirdRoute = () => (
     <View>
       <Text style={styles.text}>Groups Joined</Text>
-      <UserCard
-        username="Camping Group"
-        name="Joels, John, and 3 others"
-        avatar="https://picsum.photos/700"
-        joined
+      <SettingsCard
+        title="UW Students"
+        subTitle="A group for UW students"
+        avatar
       />
       <SettingsCard
         title="Join Other Groups"
         subTitle="See all groups you can join"
         icon="people"
+        border
       />
     </View>
   );
 
-  const renderSection = () => {
-    if (activeIndex === 0) {
-      return <FirstRoute />;
-    }
-    if (activeIndex === 1) {
-      return <SecondRoute />;
-    } else {
-      return <ThirdRoute />;
-    }
-  };
+ 
 
   return (
-    <View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          marginHorizontal: 30,
-        }}
-      >
-        <View
-          style={{
-            borderBottomColor: Colors.primary.dark,
-            borderBottomWidth: activeIndex === 0 ? 1 : 0,
-          }}
-        >
-          <IconButton
-            icon="picture-in-picture-bottom-right"
-            size={30}
-            onPress={() => {
-              setActiveIndex(0);
-            }}
-            iconColor={activeIndex === 0 ? Colors.primary.dark : "#ccc"}
-          />
-        </View>
-        <View
-          style={{
-            borderBottomColor: Colors.primary.dark,
-            borderBottomWidth: activeIndex === 1 ? 1 : 0,
-          }}
-        >
-        <IconButton
-          icon="format-list-bulleted"
-          size={30}
-          onPress={() => {
-            setActiveIndex(1);
-          }}
-          iconColor={activeIndex === 1 ? Colors.primary.dark : "#ccc"}
-        />
-        </View>
-        <View
-          style={{
-            borderBottomColor: Colors.primary.dark,
-            borderBottomWidth: activeIndex === 2 ? 1 : 0,
-          }}
-        >
-        <IconButton
-          icon="account-group"
-          size={30}
-          onPress={() => {
-            setActiveIndex(2);
-          }}
-          iconColor={activeIndex === 2 ? Colors.primary.dark : "#ccc"}
-        />
-        </View>
-      </View>
-      <View style={styles.separator} />
+    <View >
+     <SecondRoute />
+      <SpotifyCarousel />
+     <ThirdRoute />
 
-      {renderSection()}
     </View>
   );
 }

@@ -17,9 +17,8 @@ type MainUser = {
     connections: MainUser[];
     pokes: MainUser[];
     requests: MainUser[];
-    messages: Message[];
     images: string[3];
-    socials: string[3];
+    socials: string[];
     privateProfile: boolean | true;
     visibility: boolean | true;
     moreInformation: {
@@ -32,16 +31,9 @@ type MainUser = {
     groups: string[];
     notifications: Notification[];
     blocked: MainUser[];
-    
 };
 
-type Message = {
-    id: number;
-    sender: MainUser;
-    receiver: MainUser;
-    content: string;
-    time: string;
-};
+
 
 type Notification = {
     id: number;

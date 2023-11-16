@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { Avatar, Card, IconButton, Icon, Button } from "react-native-paper";
-import { Chip } from "react-native-elements";
+import { Chip, Image } from "react-native-elements";
 import SettingsCard from "../../components/SettingsCard";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -19,69 +19,80 @@ import React from "react";
 
 import mockUsers from "../mock/MockData";
 import ProfileTabs from "../../components/ProfileTabs";
+import { FontAwesome } from "@expo/vector-icons";
+import { ScrollView } from "react-native-gesture-handler";
 export default function ProfileScreen() {
   return (
-    <View style={styles.container}>
-      <Profile />
-
+    <ScrollView showsHorizontalScrollIndicator={false} 
+    showsVerticalScrollIndicator={false} 
+      style={{ paddingBottom: 80, backgroundColor: Colors.secondary.main,
+      }}
+    >
+      <Image source={{ uri: "https://images.inc.com/uploaded_files/image/1920x1080/getty_481292845_77896.jpg" }} style={{ width: "100%", height: 350, overflow: "hidden", 
+       backgroundColor: "rgba(0,0,0,0.3)",
+    }} >
+          <Profile />
+      </Image>
+      
       <Connections />
 
-      <Chip
-        type="outline"
-        title="Hey, lets be real, pineapples don't belong on pizza!"
-        icon={
-        <Ionicons name="chatbox-ellipses-outline" size={22} 
-          color={"black"}
-        />}
-        titleStyle={{ color: "black" }}
-        buttonStyle={{
-          backgroundColor: "transparent",
-          borderWidth: 0,
-          justifyContent: "flex-start",
-          gap: 5,
-          
-        }} 
-      />
-      <Text style={{ fontSize: 12, fontWeight: "400", color: "grey", 
-      marginLeft: 38, marginTop: -10, marginBottom: 15
-    }}>
-        Click to start a conversation
-      </Text>
+      <View style={styles.container} >
       
-      <View style={{ flexDirection: "row", gap: 5, marginBottom: 5 }}>
-        <Chip
-          icon={<Ionicons name="logo-instagram" size={18} color="darkblue"/>}
-          type="outline"
-          title="Instagram"
-          titleStyle={{ color: "darkblue" }}
-          buttonStyle={{
-            borderColor: "darkblue",
-            borderRadius: 10,   
-            gap: 5,   
-          }}
-        />
-        <Chip
-           icon={<Ionicons name="logo-linkedin" size={18} color="darkblue"/>}
-           type="outline"
-           title="LinkedIn"
-           titleStyle={{ color: "darkblue" }}
-           buttonStyle={{
-            borderColor: "darkblue",
-            borderRadius: 10,  
-            gap: 5,    
-          }}
-         />
-        <Chip
-          icon={<Ionicons name="logo-facebook" size={18} color="darkblue"/>}
-          type="outline"
-          title="Facebook"
-          titleStyle={{ color: "darkblue" }}
-          buttonStyle={{
-            borderColor: "darkblue",
-            borderRadius: 10,   
-            gap: 5,   
-          }}
-        />
+      <View style={{ flexDirection: "row", gap: 5, marginBottom: 5, flexWrap: "wrap"}}>
+        <Pressable style={{ 
+          borderWidth: 0.5,
+          borderColor: "grey", 
+          borderRadius: 10,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 5,
+          flex: 1
+        }} >
+            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" }} />
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Instagram</Text>
+        </Pressable>
+        
+        <Pressable style={{ 
+          borderWidth: 0.5,
+          borderColor: "grey", 
+          borderRadius: 10,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 5,
+          flex: 1
+        }} >
+            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/1200px-LinkedIn_icon.svg.png" }} />
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>LinkedIn</Text>
+        </Pressable>
+        <Pressable style={{ 
+          borderWidth: 0.5,
+          borderColor: "grey", 
+          borderRadius: 10,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 5,
+          flex: 1
+        }} >
+            <Avatar.Image size={18} source={{ uri: "https://assets.stickpng.com/images/580b57fcd9996e24bc43c536.png" }} />
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Snapchat</Text>
+        </Pressable>
+        <Pressable style={{ 
+          borderWidth: 0.5,
+          borderColor: "grey", 
+          borderRadius: 10,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 5,
+          flex: 1
+        }} >
+            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Spotify</Text>
+        </Pressable>
+    
       </View>
       <SettingsCard
         title="Private Profile"
@@ -91,7 +102,17 @@ export default function ProfileScreen() {
         border
       />
       <ProfileTabs />
-    </View>
+      </View>
+       
+        <FontAwesome 
+          name="pencil-square"
+          size={32}
+          color="white"
+          style={{ position: "absolute", top: 50, right: 10, backgroundColor: "transparent" }}
+          onPress={() => router.push("/index")}
+        />
+
+    </ScrollView>
   );
 }
 
@@ -100,25 +121,9 @@ const User = mockUsers[0];
 function Profile() {
   return (
     <View style={styles.profileContainer}>
-      <View
-        style={{
-          borderWidth: 4,
-          borderColor: Colors.secondary.main,
-          shadowColor: "black",
-          shadowOpacity: 0.5,
-          backgroundColor: "lightgrey",
-          borderRadius: 50,
-          shadowRadius: 3,
-          shadowOffset: {
-            height: 1,
-            width: 1,
-          },
-        }}
-      >
-        <Avatar.Image size={86} source={{ uri: User.avatar }} />
-      </View>
-      <View style={{ marginLeft: 10 }}>
-        <View style={{ flexDirection: "row" }}>
+     
+      <View style={{ marginLeft: 10, backgroundColor: "transparent" }}>
+        <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
           <Text style={styles.title}>{User.name}</Text>
           <IconButton
             icon="check"
@@ -134,22 +139,17 @@ function Profile() {
 
         <Text style={styles.subTitle}>@{User.username}</Text>
         <View style={styles.separator} />
-        <Text style={styles.subTitle}>
-          Seattle · last location 2 hours ago
-        </Text>
+        <View style={{
+          borderWidth: 0.5,
+          borderColor: "white",
+          borderRadius: 15,
+          backgroundColor: "transparent",
+          width: 60,
+        }}>
+          <Text style={{ color: "white", fontSize: 12, fontWeight: "500", margin: 10 }}>Active</Text>
+        </View>
       </View>
-      <IconButton
-        icon="pencil"
-        size={12}
-        style={{
-          marginLeft: "auto",
-          borderWidth: 1,
-          borderColor: "grey",
-          backgroundColor: "lightgrey",
-        }}
-        onPress={() => console.log("Pressed")}
-        
-      />
+      
     </View>
   );
 }
@@ -159,10 +159,23 @@ function Connections() {
     <View
       style={{
         flexDirection: "row",
-        marginBottom: 10,
-        marginLeft: 10,
+        marginBottom: 0,
+        marginHorizontal: 10,
+        marginTop: -20,
+        padding: 15,
+        borderRadius: 15,
+        backgroundColor: Colors.secondary.main,
+        borderWidth: 0.5,
+        borderColor: "lightgrey",
       }}
     >
+      <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
+        <Ionicons name="eye" size={22} color={Colors.primary.dark} />
+        <Text style={{ color: Colors.primary.dark }}>Visibility</Text>
+      </Pressable>
+      <View style={{ width: 30 }} />
+      <View style={{ width: 1, height: 40, backgroundColor: "lightgrey" }} />
+      <View style={{ width: 30 }} />
      <Link
         href={{ pathname: "/connections", params: { tab: "connections" } }}
         asChild
@@ -198,22 +211,21 @@ function Connections() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 25,
+    paddingTop: 20,
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: Colors.secondary.main,
-    flex: 1,
   },
   title: {
-    fontSize: 22,
-    fontWeight: "600",
-    color: "black",
+    fontSize: 32,
+    fontWeight: "900",
+    color: "white",
     marginTop: 5,
   },
   subTitle: {
-    fontSize: 15,
-    fontWeight: "300",
-    color: "black",
+    fontSize: 22,
+    fontWeight: "600",
+    color: "white",
   },
 
   separator: {
@@ -223,5 +235,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     flexDirection: "row",
     paddingBottom: 20,
+    backgroundColor: "transparent",
+    marginTop: 200,
   },
 });

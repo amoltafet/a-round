@@ -1,14 +1,16 @@
 import * as React from "react";
 import { Platform, StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "../../components/Themed";
 import { StatusBar } from "expo-status-bar";
-import NotificationCard from "../components/NotificationCard";
+import NotificationCard from "../../components/NotificationCard";
 import { FlatList } from "react-native-gesture-handler";
-import SettingsCard from "../components/SettingsCard";
+import SettingsCard from "../../components/SettingsCard";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function NotifsScreen() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.header}>Notifications</Text>
       <SettingsCard
         title="Poked Requests"
         subTitle="Approve or deny your poke requests!"
@@ -91,7 +93,7 @@ export default function NotifsScreen() {
         )}
         keyExtractor={(item) => item.title}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -99,6 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: "white",
   },
   title: {
     fontSize: 18,
@@ -108,5 +111,12 @@ const styles = StyleSheet.create({
   separator: {
     marginVertical: 10,
     height: 1,
+  },
+  header: {
+    fontSize: 22,
+    fontWeight: '600',
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });

@@ -28,10 +28,6 @@ export default function Search() {
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row' }}>
-      <Text style={styles.title}>Search</Text>
-      <Ionicons name='filter' size={24} color={Colors.primary.main} style={{marginLeft: "auto", marginRight: 10}}/>
-      </View>
       <SearchBar
         placeholder="Type Here..."
         onChangeText={updateSearch}

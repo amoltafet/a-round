@@ -23,7 +23,6 @@ const PeopleCard: React.FC<PeopleCardProps> = ({ name, cover }) => {
   const poked = Math.random() < 0.2;
   const [color, setColor] = useState("red");
 
- 
 
  
   const styles = StyleSheet.create({

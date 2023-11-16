@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleLogin = () => {
     // handle login logic here
-    router.push('/profile');
+    router.push('/index');
   };
 
   const signin = () => {
@@ -20,7 +20,7 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        router.push('/profile');
+        router.push('/index');
       })
       .catch((error) => {
         const errorCode = error.code;

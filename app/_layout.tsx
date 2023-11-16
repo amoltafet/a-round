@@ -46,7 +46,9 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <RootLayoutNav 
+    
+  />;
 }
 
 function RootLayoutNav() {
@@ -54,40 +56,31 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack
-        initialRouteName="(tabs)/messages"
-        screenOptions={{
+      <Stack screenOptions={
+        {
           headerStyle: { backgroundColor: Colors.secondary.main },
           headerShadowVisible: false,
           headerTintColor: "#000",
           headerTitleStyle: { fontWeight: "500", fontSize: 20 },
           contentStyle: { backgroundColor: Colors.secondary.main },
-        }}>
-
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        }
+      }>
+        
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }}/>
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(settingsTabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="chat" options={{ title: "Chat" }} />
-
-        <Stack.Screen
-          name="search"
-          options={{
-            presentation: "modal",
-            title: "",
-          }}
-        />
-        <Stack.Screen name="person" options={{ title: "",
+        <Stack.Screen name="search" options={{ presentation: "modal", title: "Search",
           headerRight: () => (
-            <Pressable
-              onPress={() => router.push("chat")}
-            >
-              <Ionicons name="ellipsis-vertical" size={24} color="black" />
-            </Pressable>
-          ), }} />
+            <Ionicons name='filter' size={24} color={Colors.primary.main} style={{marginLeft: "auto", marginRight: 10}}/>
+
+          ) }}/>
+        <Stack.Screen name="person" options={{ title: "" }}/>
        
-        <Stack.Screen name="settings" options={{title: "Settings & Privacy"}}/>
-        <Stack.Screen name="notifs" options={{title: "Notifications" }}/>
-        <Stack.Screen name="connections" options={{presentation: "modal", headerShown: false }}/>
+        <Stack.Screen name="connections" options={{presentation: "modal", headerShown: false,
+          contentStyle: { backgroundColor: Colors.secondary.main },
+      }}/>
+     
+
       </Stack>
     </ThemeProvider>
   );

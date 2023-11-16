@@ -19,7 +19,7 @@ export default {
   primary: {
     main: '#223548',
     secondary: '#FDFFFC',
-    third: '#121710',
+    third: '#0052D4',
     text: "#FDFFFC",
     light: '#2EC4B6',
     dark: '#011627',
