@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import {  View, StyleSheet } from "react-native";
 import { Card,IconButton, Chip } from "react-native-paper";
 import Colors from "../constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -8,9 +8,10 @@ import SettingsCard from "./SettingsCard";
 import { ScrollView } from "react-native-gesture-handler";
 import { Image } from "react-native-elements";
 import { Avatar } from "react-native-paper";
-
+import { useColorScheme } from "react-native";
+import { Text } from "./Themed";
 export default function ProfileTabs() {
-    
+  const colorScheme = useColorScheme();
   const SpotifyCarousel = () => (
     <View>
     <ScrollView style={{  gap: 8, paddingTop: 10, paddingBottom: 10 }} horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -39,7 +40,7 @@ export default function ProfileTabs() {
         <Image source={{ uri: "https://media.timeout.com/images/103279758/750/562/image.jpg" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
         <View style={{ flexDirection: "row", alignItems: "start", marginTop: 5 }}>
         <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
-        <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>Views: Drake</Text>
+        <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5,}}>Views: Drake</Text>
         </View>     
          </View>
          <View style={{ alignItems: "center", marginRight: 10 }}>
@@ -58,7 +59,9 @@ export default function ProfileTabs() {
     <View >
       <View 
       style={{
-        marginBottom: 5, marginTop: 5, gap: 10, borderWidth: 0.5, borderColor: "grey", borderRadius: 10, padding: 10
+        marginBottom: 5, marginTop: 5, gap: 10, borderWidth: 0.5, borderColor: colorScheme === 'dark' ? Colors.dark.background : "grey",
+        
+        borderRadius: 10, padding: 10
       }}>
       <ScrollView 
       horizontal={true}
@@ -81,13 +84,27 @@ export default function ProfileTabs() {
         </Chip>
       </ScrollView>
     
-        <Chip icon="briefcase" style={{borderWidth: 0}}  mode="outlined">
+        <Chip icon="briefcase" 
+          textStyle={{color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text,}}
+        style={{borderWidth: 0,
+        backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
+        }}  mode="outlined">
           Software Engineer at Expedia Group
         </Chip>
-        <Chip icon="school" style={{ borderWidth: 0}} mode="outlined">
+        <Chip icon="school" 
+                  textStyle={{color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text,}}
+
+        style={{ borderWidth: 0,
+        backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
+        }} mode="outlined">
           Student at Gonzaga Univeristy
         </Chip>
-        <Chip icon="cake" style={{ borderWidth: 0}} mode="outlined">
+        <Chip 
+                  textStyle={{color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text,}}
+
+        icon="cake" style={{ borderWidth: 0,
+        backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
+        }} mode="outlined">
           Excited to meet new people and make new friends! 
         </Chip>
       </View>

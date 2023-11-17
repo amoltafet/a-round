@@ -9,11 +9,12 @@ import { useState } from 'react';
 import UserCard from '../components/UserCard';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
+import { useColorScheme } from 'react-native';
 
 export default function Search() {
   const [users, setUsers] = useState([...mockUsers])
   const [search, setSearch] = useState("")
-
+  const colorScheme = useColorScheme();
   const updateSearch = (search: String) => {
     setSearch(search);
    // filter based on name and username 
@@ -26,6 +27,25 @@ export default function Search() {
     setUsers([...mockUsers])
   }
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 10,
+      paddingTop: 0,
+      backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
+    },
+    title: {
+      fontSize: 18,
+      fontWeight: '600',
+      left: 10,
+    },
+    separator: {
+      marginVertical: 30,
+      height: 1,
+      width: '80%',
+    },
+  });
+
   return (
     <View style={styles.container}>
       <SearchBar
@@ -34,6 +54,7 @@ export default function Search() {
         onCancel={() => cancelSearch()} 
         value={search}
         platform='ios'
+        containerStyle={{ backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background, borderBottomColor: 'transparent', borderTopColor: 'transparent' }}
     />
     <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
     {
@@ -51,21 +72,4 @@ export default function Search() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    paddingTop: 0,
-    backgroundColor: Colors.secondary.main,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '600',
-    left: 10,
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+

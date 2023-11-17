@@ -73,6 +73,7 @@ export default function ProfileTabs() {
             name={user.name}
             avatar={user.avatar}
             connected
+            key={user.id}
           />
         ))}
       </View>
@@ -101,6 +102,7 @@ export default function ProfileTabs() {
             name={user.name}
             avatar={user.avatar}
             date="1 ago"
+            key={user.id}
           />
         ))}
       </View>
@@ -129,6 +131,7 @@ export default function ProfileTabs() {
             name={user.name}
             avatar={user.avatar}
             poked
+            key={user.id}
           />
         ))}
       </View>

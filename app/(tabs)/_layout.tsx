@@ -7,6 +7,8 @@ import Profile from "./profile";
 import Notifs from "./notifs";
 import Settings from "./settings";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Animated } from "react-native";
+
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
@@ -19,6 +21,12 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   const Tab = createMaterialTopTabNavigator();
+  // catch error or loading state sending onAnimatedValueUpdate
+
+  const av = new Animated.Value(0);
+  av.addListener(() => {return});
+
+
   return (
     <Tab.Navigator
       tabBarPosition="bottom"

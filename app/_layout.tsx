@@ -69,9 +69,14 @@ function RootLayoutNav() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }}/>
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(settingsTabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="search" options={{ presentation: "modal", title: "Search",
+        <Stack.Screen name="search" options={{ presentation: "modal", title: "Search", 
+          headerStyle: { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background, 
+          
+        },headerTitleStyle: { fontWeight: "500", fontSize: 20, color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text },
           headerRight: () => (
-            <Ionicons name='filter' size={24} color={Colors.primary.main} style={{marginLeft: "auto", marginRight: 10}}/>
+            <Ionicons name='filter' size={24} 
+            color={colorScheme === 'dark' ? Colors.dark.text : Colors.light.text}
+            style={{marginLeft: "auto", marginRight: 10}}/>
 
           ) }}/>
         <Stack.Screen name="person" options={{ title: "" }}/>

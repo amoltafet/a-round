@@ -119,7 +119,7 @@ const UserCard: React.FC<UserCardProps> = ({
             <Ionicons
               name="chevron-forward"
               size={24}
-              color={Colors.primary.dark}
+              color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text}
               style={{ margin: 10 }}
             />
           ) : (
@@ -138,7 +138,7 @@ const UserCard: React.FC<UserCardProps> = ({
               <Ionicons
                 name="chatbox-outline"
                 size={24}
-                color={Colors.primary.dark}
+                color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text}
                 style={{ margin: 10 }}
               />
             </>

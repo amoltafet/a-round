@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef, Component } from "react";
 import { AppRegistry, Dimensions, Pressable, useColorScheme } from "react-native";
 import MapView, { MapOverlay, Marker, Overlay } from "react-native-maps";
 import mockUsers from "../mock/MockData";
-import { Avatar, Button, Chip, Icon, IconButton } from "react-native-paper";
+import { Avatar, Badge, Button, Chip, Icon, IconButton } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { router } from "expo-router";
@@ -28,7 +28,7 @@ export default function Map()  {
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
     // variables
-    const snapPoints = useMemo(() => ["30%", "30%"], []);
+    const snapPoints = useMemo(() => ["35%", "35%"], []);
 
     const setScreenModal = (screenName: any) => {
       console.log("setScreenModal", screenName);
@@ -78,13 +78,15 @@ export default function Map()  {
               }}
               onPress={() => setScreenModal("user")}
             > 
+            <View style={{ backgroundColor: "white", padding: 5, borderRadius: 50 }}>
                <Avatar.Image size={32} source={{ uri: marker.avatar }} /> 
+            </View>
             </Marker>
           ))}
 
           <Marker
             coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
-            title="My Location"
+            title="Come take shots with me!"
           >
             <View
               style={{ backgroundColor: "green", padding: 5, borderRadius: 50 }}
@@ -183,13 +185,14 @@ export default function Map()  {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             borderRadius: 10,
           }}
-        > 
+        >  
             <IconButton
                 icon={"thumb-up"}
                 size={22}
                 style={{ backgroundColor: "white" }}
-                onPress={() => router.push("search")}
+                onPress={() => router.push("connections")}
             />
+            <Badge style={{ position: "absolute", top: 0, right: 0 }}>9</Badge>
         </View>
         <View
           style={{
@@ -202,7 +205,8 @@ export default function Map()  {
             <IconButton
                 icon={"navigation"}
                 size={22}
-                style={{ backgroundColor: "white", borderWidth: 1.5, 
+                iconColor={useColorScheme() === "dark" ? Colors.dark.tint : Colors.light.tint}
+                style={{ 
                 transform: [{ rotate: "35deg" }]
               }}
                 onPress = {() => _mapView.animateToRegion({
@@ -218,6 +222,7 @@ export default function Map()  {
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
+        backgroundStyle={{ backgroundColor: "transparent" }}
         style={{ backgroundColor: useColorScheme() === "dark" ? Colors.dark.background : Colors.light.background }}
       >
         {screenName === "visibility" && <VisibilitySettings />}
@@ -262,11 +267,15 @@ const UserModal = () => {
     <View style={{ flex: 1, padding: 10 }}>
           <View style={{ flexDirection: "row"}}>
             <Avatar.Image size={64} source={{ uri: user.avatar }} />
-            <View style={{  marginTop: 10 }}>
+            <View style={{  marginTop: 10, flexGrow: 1 }}>
               <Text style={{ fontSize: 22, fontWeight: "500", marginLeft: 10 }}>{user.name}</Text>
-              <Text style={{ fontSize: 14, fontWeight: "400", marginLeft: 10 }}>{user.username}</Text>
+              <Text style={{ fontSize: 14, fontWeight: "400", marginLeft: 10 }}>@{user.username}</Text>
             </View>
           </View>
+        <View style={{ flexDirection: "row", marginTop: 10 }}>
+        <Ionicons name="beer-outline" size={23} color="grey" />
+        <Text style={{ fontSize: 14, fontWeight: "500", marginLeft: 10, marginTop: 3 }}>Who wants to get drinks and chat? </Text>
+        </View>
           <View style={{ flexDirection: "row", marginTop: 10 }}>
           <Button
             mode="contained"
@@ -280,7 +289,10 @@ const UserModal = () => {
             onPress={() => console.log("Pressed")}> 
             <Text style={{ color: "white" }}>Connect</Text>
           </Button>
+
           </View>
+          <Text style={{ fontSize: 14, fontWeight: "300", marginTop: 10 }}>To connect with {user.name}, you must first connect with them. </Text>
+          <IconButton icon="close" size={20} style={{ position: "absolute", top: 10, right: 10 }} onPress={() => console.log("Pressed")} />
         </View>
   )
 }
@@ -314,22 +326,22 @@ const ListOfUsers = () => {
             fontSize: 22,
             fontWeight: "500",
             marginBottom: 10,
-            marginTop: 10,
           }}>People Near You</Text>
-          <View style={{ flexDirection: "row", marginBottom: 10, gap: 10 }}>
-          <Chip  style={{ marginBottom: 10 }} mode="outlined" onPress={ () => filterByConnection()}>
+          <View  style={{ flexDirection: "row", marginBottom: 10 }}>
+          <Chip   
+          style={{ marginRight: 10 }} mode="outlined" onPress={ () => filterByConnection()}>
             Connected
           </Chip>
-          <Chip  style={{ marginBottom: 10 }} mode="outlined" onPress={() => filterByRestrict()}>
+          <Chip  style={{ marginRight: 10 }} mode="outlined" onPress={() => filterByRestrict()}>
             Restricted
           </Chip>
-          <Chip  style={{ marginBottom: 10 }} mode="outlined" onPress={() => filterByPoke()}>
+          <Chip  style={{ marginRight: 10 }} mode="outlined" onPress={() => filterByPoke()}>
             Poked
           </Chip>
-          <Chip  style={{ marginBottom: 10 }} mode="outlined" onPress={() => clearFilter()} icon={"close"}>
+          <Chip  style={{ marginRight: 10 }} mode="outlined" onPress={() => clearFilter()} icon={"close"}>
             Clear
           </Chip>
-          </View>
+          </View> 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {users.map((user, index) => (
             <View style={{ marginRight: 20 }} key={user.id}>
