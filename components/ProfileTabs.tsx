@@ -15,7 +15,7 @@ export default function ProfileTabs() {
     <View>
     <ScrollView style={{  gap: 8, paddingTop: 10, paddingBottom: 10 }} horizontal={true} showsHorizontalScrollIndicator={false}>
       <View style={{ alignItems: "center", marginRight: 10 }}>
-        <Image source={{ uri: "https://pub-static.fotor.com/assets/projects/pages/c7d9749a29fc44a5a54da2bba21165af/gradient-cool-new-bullet-e52b9cac8825471981dc12dd343176da.jpg" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
+        <Image source={{ uri: "https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
         <View style={{ flexDirection: "row", alignItems: "start", marginTop: 5 }}>
         <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
         <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>The Weeknd</Text>
@@ -36,13 +36,19 @@ export default function ProfileTabs() {
         </View>     
          </View>
          <View style={{ alignItems: "center", marginRight: 10 }}>
-        <Image source={{ uri: "https://en.wikipedia.org/wiki/File:Drake_-_Views_cover.jpg" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
+        <Image source={{ uri: "https://media.timeout.com/images/103279758/750/562/image.jpg" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
         <View style={{ flexDirection: "row", alignItems: "start", marginTop: 5 }}>
         <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
         <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>Views: Drake</Text>
         </View>     
          </View>
-
+         <View style={{ alignItems: "center", marginRight: 10 }}>
+        <Image source={{ uri: "https://media.pitchfork.com/photos/647e290ae7a8aa8db8026970/master/pass/Taylor-Swift.jpg" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
+        <View style={{ flexDirection: "row", alignItems: "start", marginTop: 5 }}>
+        <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
+        <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>Speak Now: Swift</Text>
+        </View>     
+         </View>
   
     </ScrollView>
     </View>
@@ -85,49 +91,6 @@ export default function ProfileTabs() {
           Excited to meet new people and make new friends! 
         </Chip>
       </View>
-      <View style={styles.separator} />
-      <View style={{ flexDirection: "row", marginBottom: 10 }}>
-        <Ionicons
-          name="school-outline"
-          size={18}
-          color="black"
-          style={{ marginRight: 10 }}
-        />
-        <Text style={styles.description}>University of Washington</Text>
-        <Text style={styles.description}> - Economics Major</Text>
-      </View>
-      <View style={{ flexDirection: "row", marginBottom: 10 }}>
-        <Ionicons
-          name="briefcase-outline"
-          size={18}
-          color="black"
-          style={{ marginRight: 10 }}
-        />
-        <Text style={styles.description}>Starbucks - Barista</Text>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.text}>Bio</Text>
-        <View style={styles.separator} />
-        <Text style={styles.description}>
-          I am a project manager at Facebook. I love to snowboard and watch
-          movies.{" "}
-        </Text>
-      </View>
-      <Text style={styles.text}>Interests</Text>
-      <View style={styles.separator} />
-      <View style={{ flexDirection: "row" }}>
-        <Chip icon="car" style={{ marginRight: 10 }}>
-          cars
-        </Chip>
-
-        <Chip icon="movie" style={{ marginRight: 10 }}>
-          Movies
-        </Chip>
-        <Chip icon="snowflake" style={{ marginRight: 10 }}>
-          Snowboarding
-        </Chip>
-      </View>
     </View>
   );
 
@@ -135,9 +98,22 @@ export default function ProfileTabs() {
     <View>
       <Text style={styles.text}>Groups Joined</Text>
       <SettingsCard
-        title="UW Students"
-        subTitle="A group for UW students"
+        title="Gonzaga University Students"
+        subTitle="Maria: Hi everyone! I'm a freshman at Gonzaga and I'm looking to meet new people!"
         avatar
+        border
+      />
+      <SettingsCard
+        title="Engineering 231"
+        subTitle="Shafiq: Can someone help me with week 3's homework?"
+        avatar
+        border
+      />
+      <SettingsCard
+        title="Expedia Group"
+        subTitle="Tomato Street at 6:00 PM tonight!"
+        avatar
+        border
       />
       <SettingsCard
         title="Join Other Groups"

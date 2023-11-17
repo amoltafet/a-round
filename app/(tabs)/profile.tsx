@@ -162,7 +162,7 @@ function Connections() {
         marginBottom: 0,
         marginHorizontal: 10,
         marginTop: -20,
-        padding: 15,
+        padding: 10,
         borderRadius: 15,
         backgroundColor: Colors.secondary.main,
         borderWidth: 0.5,
@@ -171,17 +171,17 @@ function Connections() {
     >
       <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
         <Ionicons name="eye" size={22} color={Colors.primary.dark} />
-        <Text style={{ color: Colors.primary.dark }}>Visibility</Text>
+        <Text style={{ color: Colors.primary.dark,}}>Visibility</Text>
       </Pressable>
-      <View style={{ width: 30 }} />
+      <View style={{ width: 25 }} />
       <View style={{ width: 1, height: 40, backgroundColor: "lightgrey" }} />
-      <View style={{ width: 30 }} />
+      <View style={{ width: 20 }} />
      <Link
         href={{ pathname: "/connections", params: { tab: "connections" } }}
         asChild
       >
         <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ color: Colors.primary.dark, fontSize: 18, fontWeight: "bold" }}>{User.connections}</Text>
+        <Text style={{ color: Colors.primary.dark, fontSize: 18, fontWeight: "bold" }}>149</Text>
         <Text style={{ color: Colors.primary.dark }}>Connections</Text></Pressable>
       </Link>
       <View style={{ width: 30 }} />
