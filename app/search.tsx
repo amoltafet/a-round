@@ -41,6 +41,7 @@ export default function Search() {
         return (
           <UserCard name={user.name} username={user.username} avatar={user.avatar} arrow 
             link='/person' 
+            key={user.id}
           />
         )
       })

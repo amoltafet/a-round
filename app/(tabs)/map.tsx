@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef, Component } from "react";
 import { AppRegistry, Dimensions, Pressable } from "react-native";
 import MapView, { MapOverlay, Marker, Overlay } from "react-native-maps";
 import mockUsers from "../mock/MockData";
-import { Avatar, Icon, IconButton } from "react-native-paper";
+import { Avatar, Button, Chip, Icon, IconButton } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { router } from "expo-router";
@@ -13,7 +13,7 @@ import {
     BottomSheetModalProvider,
   } from "@gorhom/bottom-sheet";
 import SettingsCard from "../../components/SettingsCard";
-// One can change the mapview's position using refs and component methods, or by passing in an updated region prop. The component methods will allow one to animate to a given position like the native API could.
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Map()  {
     const [initialRegion, setInitialRegion] = React.useState({
@@ -23,15 +23,22 @@ export default function Map()  {
         longitudeDelta: 0.0421,
       });
 
+    const [screenName, setScreenName] = React.useState("");
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
     // variables
     const snapPoints = useMemo(() => ["30%", "30%"], []);
 
+    const setScreenModal = (screenName: any) => {
+      console.log("setScreenModal", screenName);
+        setScreenName(screenName);
+        handlePresentModalPress();
+    }
     // callbacks
     const handlePresentModalPress = useCallback(() => {
         bottomSheetModalRef.current?.present();
     }, []);
+
     const handleSheetChanges = useCallback((index: number) => {
         console.log("handleSheetChanges", index);
     }, []);
@@ -49,15 +56,15 @@ export default function Map()  {
     );
     const screen = Dimensions.get("screen");
    
-    
     return (
     <BottomSheetModalProvider>
       <View style={{ position: "relative", height: "100%" }}>
         <MapView
           ref = {(mapView) => { _mapView = mapView; }}
           scrollEnabled={true}
-          zoomEnabled={false}
+          zoomEnabled={true}
           minZoomLevel={18}
+          maxZoomLevel={20}
           style={{ left: 0, right: 0, top: 0, bottom: 0, position: "absolute" }}
           initialRegion={initialRegion}
         >
@@ -68,8 +75,9 @@ export default function Map()  {
                 latitude: 37.78825 + Math.random() * (0.001 - -0.001) + -0.001,
                 longitude: -122.4324 - Math.random() * 0.001,
               }}
-            >
-              <Avatar.Image size={32} source={{ uri: marker.avatar }} />
+              onPress={() => setScreenModal("user")}
+            > 
+               <Avatar.Image size={32} source={{ uri: marker.avatar }} /> 
             </Marker>
           ))}
 
@@ -98,13 +106,19 @@ export default function Map()  {
             icon={"eye"}
             size={22}
             style={{ backgroundColor: "white" }}
-            onPress={handlePresentModalPress}
+            onPress={() => setScreenModal("visibility")}
           />
           <IconButton
             icon={"search-web"}
             size={22}
             style={{ backgroundColor: "white" }}
             onPress={() => router.push("search")}
+          />
+          <IconButton
+            icon={"format-list-bulleted"}
+            size={22}
+            style={{ backgroundColor: "white" }}
+            onPress={() => setScreenModal("list")}
           />
           <IconButton
             icon={"baseball"}
@@ -163,7 +177,7 @@ export default function Map()  {
         <View
           style={{
             position: "absolute",
-            top: 330,
+            top: 380,
             right: 10,
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             borderRadius: 10,
@@ -187,7 +201,7 @@ export default function Map()  {
             <IconButton
                 icon={"navigation"}
                 size={22}
-                style={{ backgroundColor: "white", borderWidth: 0.5, 
+                style={{ backgroundColor: "white", borderWidth: 1.5, 
                 transform: [{ rotate: "35deg" }]
               }}
                 onPress = {() => _mapView.animateToRegion({
@@ -204,7 +218,19 @@ export default function Map()  {
         onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
       >
-        <View style={{ flex: 1, padding: 10 }}>
+        {screenName === "visibility" && <VisibilitySettings />}
+        {screenName === "user" && <UserModal />}
+        {screenName === "list" && <ListOfUsers />}
+      </BottomSheetModal>
+      </BottomSheetModalProvider>
+
+    );
+  }
+
+
+const VisibilitySettings = () => {
+  return (
+    <View style={{ flex: 1, padding: 10 }}>
           <Text style={{
             fontSize: 22,
             fontWeight: "500",
@@ -225,9 +251,94 @@ export default function Map()  {
             border
           />
         </View>
-      </BottomSheetModal>
-      </BottomSheetModalProvider>
+  )
+}
 
-    );
+const UserModal = () => {
+  const user = mockUsers[0];
+  return (
+    <View style={{ flex: 1, padding: 10 }}>
+          <View style={{ flexDirection: "row"}}>
+            <Avatar.Image size={64} source={{ uri: user.avatar }} />
+            <View style={{  marginTop: 10 }}>
+              <Text style={{ fontSize: 22, fontWeight: "500", marginLeft: 10 }}>{user.name}</Text>
+              <Text style={{ fontSize: 14, fontWeight: "400", marginLeft: 10 }}>{user.username}</Text>
+            </View>
+          </View>
+          <View style={{ flexDirection: "row", marginTop: 10 }}>
+          <Button
+            mode="contained"
+            style={{ marginTop: 10, marginRight: 10, backgroundColor: Colors.light.tint }}
+            onPress={() => console.log("Pressed")}> 
+            <Text style={{ color: "white" }}>Restrict</Text>
+          </Button>
+          <Button
+            mode="contained"
+            style={{ marginTop: 10, backgroundColor: Colors.light.tint, flex: 1 }}
+            onPress={() => console.log("Pressed")}> 
+            <Text style={{ color: "white" }}>Connect</Text>
+          </Button>
+          </View>
+        </View>
+  )
+}
+
+const ListOfUsers = () => {
+  const [users, setUsers] = React.useState(mockUsers)
+  const [currentUser, setCurrentUser] = React.useState(mockUsers[0])
+  
+  const filterByConnection = () => {
+    clearFilter()
+    setUsers(users.filter((user) => currentUser.connections.includes(user.id)))
   }
 
+  const filterByPoke = () => {
+    clearFilter()
+    setUsers(users.filter((user) => currentUser.pokes.includes(user.id)))
+  }
+
+  const filterByRestrict = () => {
+    clearFilter()
+    setUsers(users.filter((user) => currentUser.blocked.includes(user.id)))
+  }
+
+  const clearFilter = () => {
+    setUsers(mockUsers)
+  }
+
+  return (
+    <View style={{ flex: 1, padding: 10 }}>
+          <Text style={{
+            fontSize: 22,
+            fontWeight: "500",
+            marginBottom: 10,
+            marginTop: 10,
+          }}>People Near You</Text>
+          <View style={{ flexDirection: "row", marginBottom: 10, gap: 10 }}>
+          <Chip  style={{ marginBottom: 10 }} mode="outlined" onPress={ () => filterByConnection()}>
+            Connected
+          </Chip>
+          <Chip  style={{ marginBottom: 10 }} mode="outlined" onPress={() => filterByRestrict()}>
+            Restricted
+          </Chip>
+          <Chip  style={{ marginBottom: 10 }} mode="outlined" onPress={() => filterByPoke()}>
+            Poked
+          </Chip>
+          <Chip  style={{ marginBottom: 10 }} mode="outlined" onPress={() => clearFilter()} icon={"close"}>
+            Clear
+          </Chip>
+          </View>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {users.map((user, index) => (
+            <View style={{ marginRight: 20 }} key={user.id}>
+            <Avatar.Image key={index} size={64} source={{ uri: user.avatar }} />
+            <Text style={{ textAlign: "center",
+              fontSize: 12, paddingTop: 5, fontWeight: "600"
+          }}>{user.username}</Text>
+            </View>
+          ))  
+          }
+          </ScrollView>
+      </View>
+  )
+}
