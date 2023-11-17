@@ -1,9 +1,40 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import SettingsCard from '../../components/SettingsCard';
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import {
+  DarkTheme,
+  DefaultTheme,
+} from "@react-navigation/native";
 export default function ModalScreen() {
+  const colorTheme = useColorScheme();
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 5,
+      backgroundColor: colorTheme === 'dark' ? DarkTheme.colors.background : DefaultTheme.colors.background,
+    },
+    header: {
+      fontSize: 22,
+      fontWeight: '600',
+      marginLeft: 10,
+      marginTop: 20,
+      marginBottom: 20,
+    },
+    title: {
+      fontSize: 15,
+      fontWeight: '600',
+      color: 'grey',
+      marginLeft: 15,
+    },
+    separator: {
+      marginVertical: 5,
+      height: 1,
+      width: '80%',
+    },
+  });
+
+  
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Settings & Privacy</Text>
@@ -29,29 +60,3 @@ export default function ModalScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 5,
-    backgroundColor: 'white',
-  },
-  header: {
-    fontSize: 22,
-    fontWeight: '600',
-    marginLeft: 10,
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: 'grey',
-    marginLeft: 15,
-  },
-  separator: {
-    marginVertical: 5,
-    height: 1,
-    width: '80%',
-  },
-});

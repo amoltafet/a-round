@@ -1,6 +1,6 @@
 import { useColorScheme } from "react-native";
 import Colors from "../../constants/Colors";
-import { Avatar} from "react-native-paper";
+import { Avatar, Badge} from "react-native-paper";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Map from "./map";
 import Profile from "./profile";
@@ -27,13 +27,14 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         tabBarInactiveTintColor: "grey",
         tabBarIndicatorContainerStyle: {
-          backgroundColor: "white",
+          backgroundColor: colorScheme === 'dark' ? Colors.dark.background: Colors.light.background,
           borderRadius: 20,
           marginBottom: 25,
         },
         tabBarIndicatorStyle: {
           backgroundColor: Colors[colorScheme ?? "light"].tint,
         }, 
+      
         
         
       }}
@@ -79,6 +80,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="bell-outline" color={color} />
           ),
+          
          
         }}
         component={Notifs}

@@ -7,6 +7,11 @@ import { Link, router } from "expo-router";
 import { Pressable } from "react-native";
 import StackedAvatars from "./StackedAvatars";
 import mockUsers from "../app/mock/MockData";
+import {
+  DarkTheme,
+  DefaultTheme,
+} from "@react-navigation/native";
+import { useColorScheme } from "react-native";
 
 interface SettingsCardProps {
   title: string;
@@ -31,6 +36,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
   const handleToggle = () => {
     setToggleState(!toggleState);
   };
+  const colorScheme = useColorScheme();
 
   return (
     <Pressable
@@ -49,7 +55,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
           borderRadius: 10,
           padding: 5,
           margin: 3,
-          backgroundColor: Colors.primary.text,
+          backgroundColor: colorScheme === 'dark' ? Colors.dark.background: Colors.light.background,
         }}
       >
         {avatar ? (
@@ -64,12 +70,16 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
         />
         </View>
       ) : (
-        <Ionicons name={icon} size={26} color={Colors.primary.dark} style={{ margin: 10 }} />
+        <Ionicons name={icon} size={26} color={ colorScheme === 'dark' ? DarkTheme.colors.text : DefaultTheme.colors.text}
+        
+        style={{ margin: 10 }} />
       )}
-        <View style={{ flex: 1, margin: 5, backgroundColor: Colors.primary.text,
+        <View style={{ flex: 1, margin: 5, backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
           marginTop: avatar ? 10 : 5
         }}>
-          <Text style={{ fontSize: 19, fontWeight: "500" }}>{title}</Text>
+          <Text style={{ fontSize: 19, fontWeight: "500",
+          color: colorScheme === 'dark' ? DarkTheme.colors.text : DefaultTheme.colors.text
+        }}>{title}</Text>
           <Text style={{ fontSize: 12, color: "grey" }}>{subTitle}</Text>
         </View>
         {toggle ? (
@@ -77,13 +87,13 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
             value={toggleState}
             onValueChange={handleToggle}
             style={{ margin: 10}}
-            color={Colors.primary.dark}
+            color={colorScheme === 'dark' ? DefaultTheme.colors.background : DarkTheme.colors.background }
           />
         ) : (
           <Ionicons
             name="chevron-forward"
             size={24}
-            color={Colors.primary.dark}
+            color={colorScheme === 'dark' ? DefaultTheme.colors.background : DarkTheme.colors.background }
             style={{ margin: 10, marginTop: avatar ? 15 : 10 }}
           />
         )}

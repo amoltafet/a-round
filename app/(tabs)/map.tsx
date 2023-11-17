@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, Component } from "react";
-import { AppRegistry, Dimensions, Pressable } from "react-native";
+import { AppRegistry, Dimensions, Pressable, useColorScheme } from "react-native";
 import MapView, { MapOverlay, Marker, Overlay } from "react-native-maps";
 import mockUsers from "../mock/MockData";
 import { Avatar, Button, Chip, Icon, IconButton } from "react-native-paper";
@@ -14,6 +14,7 @@ import {
   } from "@gorhom/bottom-sheet";
 import SettingsCard from "../../components/SettingsCard";
 import { ScrollView } from "react-native-gesture-handler";
+import { color } from "react-native-elements/dist/helpers";
 
 export default function Map()  {
     const [initialRegion, setInitialRegion] = React.useState({
@@ -217,6 +218,7 @@ export default function Map()  {
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
+        style={{ backgroundColor: useColorScheme() === "dark" ? Colors.dark.background : Colors.light.background }}
       >
         {screenName === "visibility" && <VisibilitySettings />}
         {screenName === "user" && <UserModal />}

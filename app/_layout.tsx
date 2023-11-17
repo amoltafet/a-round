@@ -77,7 +77,7 @@ function RootLayoutNav() {
         <Stack.Screen name="person" options={{ title: "" }}/>
        
         <Stack.Screen name="connections" options={{presentation: "modal", headerShown: false,
-          contentStyle: { backgroundColor: Colors.secondary.main },
+          contentStyle: { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background, },
       }}/>
      
 

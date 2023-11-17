@@ -8,15 +8,48 @@ import mockUsers from "./mock/MockData";
 import UserCard from "../components/UserCard";
 import { ScrollView } from "react-native-gesture-handler";
 import { SearchBar } from "react-native-elements";
-
+import { useColorScheme } from "react-native";
 export default function ProfileTabs() {
   const { tab } = useLocalSearchParams<{ tab: string }>();
-
+  const colorScheme = useColorScheme();
   const [activeIndex, setActiveIndex] = React.useState(tab);
 
   if (activeIndex === undefined) {
     setActiveIndex("pokes");
   }
+  const styles = StyleSheet.create({
+    container: {
+      padding: 5,
+      backgroundColor: colorScheme === "dark" ? Colors.dark.background : Colors.light.background,
+    },
+    separator: {
+      marginVertical: 10,
+      borderWidth: 0.5,
+      borderColor: "#E8E8E8",
+      height: 1,
+      width: "100%",
+    },
+    card: {
+      borderWidth: 1,
+      borderColor: Colors.secondary.main,
+      padding: 10,
+      borderRadius: 10,
+      marginBottom: 10,
+    },
+    text: {
+      fontSize: 18,
+      fontWeight: "bold",
+      marginBottom: 5,
+    },
+    description: {
+      fontSize: 15,
+      fontWeight: "300",
+    },
+    chip: {
+      marginRight: 10,
+    },
+  });
+
   const FirstRoute = () => (
     <ScrollView>
       <View style={styles.container}>
@@ -75,9 +108,9 @@ export default function ProfileTabs() {
   );
 
   const FourthRoute = () => (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background }}>
       <View style={styles.container}>
-        <View style={{ flexDirection: "row", margin: 5 }}>
+        <View style={{ flexDirection: "row", margin: 5, backgroundColor: "transparent"}}>
           <Ionicons name="information-circle-outline" size={18} color="grey" />
           <Text
             style={{
@@ -114,19 +147,21 @@ export default function ProfileTabs() {
   };
 
   return (
-    <View>
+    <View style={{  backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background 
+    }}>
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
           marginHorizontal: 30,
           marginTop: 30,
+          backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background
         }}
       >
         <View
           style={{
             borderBottomWidth: activeIndex === "connections" ? 1 : 0,
-            borderBottomColor: Colors.primary.dark,
+            borderBottomColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text
           }}
         >
           <Pressable
@@ -135,13 +170,15 @@ export default function ProfileTabs() {
               setActiveIndex("connections");
             }}
           >
-            <Text>Connections</Text>
+            <Text 
+            style={{ color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text }}
+            >Connections</Text>
           </Pressable>
         </View>
         <View
           style={{
             borderBottomWidth: activeIndex === "pokes" ? 1 : 0,
-            borderBottomColor: Colors.primary.dark,
+            borderBottomColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text
           }}
         >
           <Pressable
@@ -150,13 +187,15 @@ export default function ProfileTabs() {
               setActiveIndex("pokes");
             }}
           >
-            <Text>Pokes</Text>
+            <Text 
+            style={{ color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text }}
+            >Pokes</Text>
           </Pressable>
         </View>
         <View
           style={{
             borderBottomWidth: activeIndex === "requests" ? 1 : 0,
-            borderBottomColor: Colors.primary.dark,
+            borderBottomColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text,
           }}
         >
           <Pressable
@@ -166,7 +205,9 @@ export default function ProfileTabs() {
               setActiveIndex("requests");
             }}
           >
-            <Text>Requests </Text>
+            <Text 
+            style={{ color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text }}
+            >Requests </Text>
           </Pressable>
         </View>
       </View>
@@ -177,34 +218,4 @@ export default function ProfileTabs() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 5,
-  },
-  separator: {
-    marginVertical: 10,
-    borderWidth: 0.5,
-    borderColor: "#E8E8E8",
-    height: 1,
-    width: "100%",
-  },
-  card: {
-    borderWidth: 1,
-    borderColor: Colors.secondary.main,
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
-  description: {
-    fontSize: 15,
-    fontWeight: "300",
-  },
-  chip: {
-    marginRight: 10,
-  },
-});
+

@@ -5,6 +5,7 @@ import { Avatar, Chip, Switch } from "react-native-paper";
 import Colors from "../constants/Colors";
 import { Link, router } from "expo-router";
 import { Pressable } from "react-native";
+import { useColorScheme } from "react-native";
 
 interface UserCardProps {
   avatar: string;
@@ -35,12 +36,13 @@ const UserCard: React.FC<UserCardProps> = ({
   chat,
   border,
 }) => {
+  const colorScheme = useColorScheme();
   return (
     <Link
       href={{ pathname: chat ? "/chat" : "/person", params: { user: name } }}
       asChild
     >
-      <Pressable style={{ backgroundColor: Colors.secondary.main }}>
+      <Pressable style={{ backgroundColor: colorScheme === "dark" ? Colors.dark.background: Colors.light.background }}>
         <View
           style={{
             flexDirection: "row",
@@ -49,6 +51,10 @@ const UserCard: React.FC<UserCardProps> = ({
             borderColor: "lightgrey",
             borderWidth: border ? 0.5 : 0,
             borderRadius: 10,
+            backgroundColor:
+              colorScheme === "dark"
+                ? Colors.dark.background
+                : Colors.light.background,
           }}
         >
           <Avatar.Image size={48} source={{ uri: avatar }} />
