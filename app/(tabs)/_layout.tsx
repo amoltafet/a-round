@@ -1,81 +1,103 @@
-import { Link, Tabs, Navigator, useNavigation } from "expo-router";
-import { Pressable, useColorScheme } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { useColorScheme } from "react-native";
 import Colors from "../../constants/Colors";
+import { Avatar} from "react-native-paper";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Map from "./map";
+import Profile from "./profile";
+import Notifs from "./notifs";
+import Settings from "./settings";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof Ionicons>["name"];
+  name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;
 }) {
-  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <MaterialCommunityIcons size={24}  {...props} />;
 }
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  
+
+  const Tab = createMaterialTopTabNavigator();
   return (
-    <Tabs
+    <Tab.Navigator
+      tabBarPosition="bottom"
+      initialRouteName="map"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarInactiveTintColor: "grey",
+        tabBarIndicatorContainerStyle: {
+          backgroundColor: "white",
+          borderRadius: 20,
+          marginBottom: 25,
+        },
+        tabBarIndicatorStyle: {
+          backgroundColor: Colors[colorScheme ?? "light"].tint,
+        }, 
+        
+        
       }}
     >
-      <Tabs.Screen
-        name="messages"
+      <Tab.Screen
+        name="map"
         options={{
-          title: "Inbox",
+          title: "Map",
+          tabBarLabel: "",
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="chatbox-ellipses-outline" color={color} />
+            <TabBarIcon name="map-marker-account" color={color} />
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "A-Round",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="at-circle" color={color} />
-          ),
-          headerShown: false,
-        }}
-      />
-      <Tabs.Screen
+         
+          
+        }} 
+        component={Map}
+
+        />
+       <Tab.Screen
         name="profile"
         options={{
-          title: "Profile",
-          tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
-          headerLeft: () => (
-            <Link href="/settings" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <Ionicons
-                    name="settings-outline"
-                    style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                  />
-                )}
-              </Pressable>
-            </Link>
+          title: "",
+          tabBarIcon: ({ color }) => (
+           
+              <Avatar.Image
+                size={24}
+                source={{
+                  uri: "https://randomuser.me/api/portraits/men/1.jpg",
+                }}
+              />
           ),
-          headerRight: () => (
-            <Link href="/notifs" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <Ionicons
-                    name="notifications-outline"
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+         
         }}
+        component={Profile}
+
       />
-    </Tabs>
+    
+      <Tab.Screen
+        name="notifs"
+        options={{
+          title: "Notifications",
+          tabBarLabel: "",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="bell-outline" color={color} />
+          ),
+         
+        }}
+        component={Notifs}
+
+      />
+    
+      <Tab.Screen
+        name="settings"
+        options={{
+          title: "Settings & Privacy",
+          tabBarLabel: "",
+          tabBarShowLabel: true,
+          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
+         
+        }}
+        component={Settings}
+      />
+    </Tab.Navigator>
+    
+   
   );
 }

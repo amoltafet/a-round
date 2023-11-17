@@ -5,10 +5,12 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack, router } from "expo-router";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { Pressable, useColorScheme } from "react-native";
 import { View } from "../components/Themed";
+import Colors from "../constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -44,7 +46,9 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <RootLayoutNav 
+    
+  />;
 }
 
 function RootLayoutNav() {
@@ -52,28 +56,32 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="settings"
-            options={{
-              title: "Settings",
-            }}
-          />
-          <Stack.Screen
-            name="notifs"
-            options={{
-              title: "Notifications",
-              headerStyle: {
-                backgroundColor: "#fff",
-              },
-              headerTintColor: "#000",
-              headerTitleStyle: {
-                fontWeight: "bold",
-              },
-            }}
-          />
-        </Stack>
+      <Stack screenOptions={
+        {
+          headerStyle: { backgroundColor: Colors.secondary.main },
+          headerShadowVisible: false,
+          headerTintColor: "#000",
+          headerTitleStyle: { fontWeight: "500", fontSize: 20 },
+          contentStyle: { backgroundColor: Colors.secondary.main },
+        }
+      }>
+        
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }}/>
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(settingsTabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="search" options={{ presentation: "modal", title: "Search",
+          headerRight: () => (
+            <Ionicons name='filter' size={24} color={Colors.primary.main} style={{marginLeft: "auto", marginRight: 10}}/>
+
+          ) }}/>
+        <Stack.Screen name="person" options={{ title: "" }}/>
+       
+        <Stack.Screen name="connections" options={{presentation: "modal", headerShown: false,
+          contentStyle: { backgroundColor: Colors.secondary.main },
+      }}/>
+     
+
+      </Stack>
     </ThemeProvider>
   );
 }

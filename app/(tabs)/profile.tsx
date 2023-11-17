@@ -1,158 +1,241 @@
-import { StyleSheet } from "react-native";
+import {
+  useWindowDimensions,
+  StyleSheet,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+  Pressable,
+} from "react-native";
 import { Text, View } from "../../components/Themed";
-import { Chip, Avatar, Button, Card } from "react-native-paper";
+import { Avatar, Card, IconButton, Icon, Button } from "react-native-paper";
+import { Chip, Image } from "react-native-elements";
 import SettingsCard from "../../components/SettingsCard";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Link, router } from "expo-router";
+import Colors from "../../constants/Colors";
+import { TabView, SceneMap } from "react-native-tab-view";
+import React from "react";
 
+import mockUsers from "../mock/MockData";
+import ProfileTabs from "../../components/ProfileTabs";
+import { FontAwesome } from "@expo/vector-icons";
+import { ScrollView } from "react-native-gesture-handler";
 export default function ProfileScreen() {
   return (
-    <View style={styles.container}>
-      <Profile />
+    <ScrollView showsHorizontalScrollIndicator={false} 
+    showsVerticalScrollIndicator={false} 
+      style={{ paddingBottom: 80, backgroundColor: Colors.secondary.main,
+      }}
+    >
+      <Image source={{ uri: "https://images.inc.com/uploaded_files/image/1920x1080/getty_481292845_77896.jpg" }} style={{ width: "100%", height: 350, overflow: "hidden", 
+       backgroundColor: "rgba(0,0,0,0.3)",
+    }} >
+          <Profile />
+      </Image>
+      
       <Connections />
-      <Photos />
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <PersonalInfo />
+
+      <View style={styles.container} >
+      
+      <View style={{ flexDirection: "row", gap: 5, marginBottom: 5, flexWrap: "wrap"}}>
+        <Pressable style={{ 
+          borderWidth: 0.5,
+          borderColor: "grey", 
+          borderRadius: 10,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 5,
+          flex: 1
+        }} >
+            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" }} />
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Instagram</Text>
+        </Pressable>
+        
+        <Pressable style={{ 
+          borderWidth: 0.5,
+          borderColor: "grey", 
+          borderRadius: 10,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 5,
+          flex: 1
+        }} >
+            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/1200px-LinkedIn_icon.svg.png" }} />
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>LinkedIn</Text>
+        </Pressable>
+        <Pressable style={{ 
+          borderWidth: 0.5,
+          borderColor: "grey", 
+          borderRadius: 10,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 5,
+          flex: 1
+        }} >
+            <Avatar.Image size={18} source={{ uri: "https://assets.stickpng.com/images/580b57fcd9996e24bc43c536.png" }} />
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Snapchat</Text>
+        </Pressable>
+        <Pressable style={{ 
+          borderWidth: 0.5,
+          borderColor: "grey", 
+          borderRadius: 10,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 5,
+          flex: 1
+        }} >
+            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Spotify</Text>
+        </Pressable>
+    
+      </View>
       <SettingsCard
-        title="Complete Privacy"
-        subTitle="Control your profile visibility"
-        icon="eye-outline"
+        title="Private Profile"
+        subTitle="Only your connections can see your profile"
+        icon="md-lock-closed-outline"
+        toggle
+        border
       />
-    </View>
+      <ProfileTabs />
+      </View>
+       
+        <FontAwesome 
+          name="pencil-square"
+          size={32}
+          color="white"
+          style={{ position: "absolute", top: 50, right: 10, backgroundColor: "transparent" }}
+          onPress={() => router.push("/index")}
+        />
+
+    </ScrollView>
   );
 }
+
+const User = mockUsers[0];
 
 function Profile() {
   return (
     <View style={styles.profileContainer}>
-      <Avatar.Text size={48} label="XD" />
-      <View style={{ marginLeft: 10 }}>
-        <Text style={styles.title}>Xervior Dormand</Text>
-        <Text style={styles.subTitle}>Project Manager at Facebook</Text>
+     
+      <View style={{ marginLeft: 10, backgroundColor: "transparent" }}>
+        <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
+          <Text style={styles.title}>{User.name}</Text>
+          <IconButton
+            icon="check"
+            size={10}
+            style={{
+              borderWidth: 1,
+              borderColor: "grey",
+              borderStyle: "dashed",
+            }}
+            onPress={() => console.log("Pressed")}
+          />
+        </View>
+
+        <Text style={styles.subTitle}>@{User.username}</Text>
+        <View style={styles.separator} />
+        <View style={{
+          borderWidth: 0.5,
+          borderColor: "white",
+          borderRadius: 15,
+          backgroundColor: "transparent",
+          width: 60,
+        }}>
+          <Text style={{ color: "white", fontSize: 12, fontWeight: "500", margin: 10 }}>Active</Text>
+        </View>
       </View>
+      
     </View>
   );
 }
 
 function Connections() {
   return (
-    <View style={styles.profileContainer}>
-      <Button mode="contained" onPress={() => console.log("Pressed")}>
-        10 Profile Views
-      </Button>
-      <Button
-        mode="outlined"
-        onPress={() => console.log("Pressed")}
-        style={{ marginLeft: 10 }}
+    <View
+      style={{
+        flexDirection: "row",
+        marginBottom: 0,
+        marginHorizontal: 10,
+        marginTop: -20,
+        padding: 15,
+        borderRadius: 15,
+        backgroundColor: Colors.secondary.main,
+        borderWidth: 0.5,
+        borderColor: "lightgrey",
+      }}
+    >
+      <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
+        <Ionicons name="eye" size={22} color={Colors.primary.dark} />
+        <Text style={{ color: Colors.primary.dark }}>Visibility</Text>
+      </Pressable>
+      <View style={{ width: 30 }} />
+      <View style={{ width: 1, height: 40, backgroundColor: "lightgrey" }} />
+      <View style={{ width: 30 }} />
+     <Link
+        href={{ pathname: "/connections", params: { tab: "connections" } }}
+        asChild
       >
-        532 Connections
-      </Button>
-    </View>
-  );
-}
+        <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ color: Colors.primary.dark, fontSize: 18, fontWeight: "bold" }}>{User.connections}</Text>
+        <Text style={{ color: Colors.primary.dark }}>Connections</Text></Pressable>
+      </Link>
+      <View style={{ width: 30 }} />
 
-function Photos() {
-  return (
-    <View style={{ flexDirection: "row", gap: 8 }}>
-      <Card style={{ flex: 1 }}>
-        <Card.Cover source={{ uri: "https://picsum.photos/300" }} />
-      </Card>
-      <Card style={{ flex: 1 }}>
-        <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-      </Card>
-      <Card style={{ flex: 1 }}>
-        <Card.Cover source={{ uri: "https://picsum.photos/400" }} />
-      </Card>
-    </View>
-  );
-}
+      <Link
+        href={{ pathname: "/connections", params: { tab: "requests" } }}
+        asChild
+      >
+        <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ color: Colors.primary.dark, fontSize: 18, fontWeight: "bold" }}>2</Text>
+        <Text style={{ color: Colors.primary.dark }}>Requests</Text></Pressable>
+      </Link>
 
-function PersonalInfo() {
-  return (
-    <View>
-      <View style={styles.profileContainer}>
-        <Ionicons
-          name="school-outline"
-          size={18}
-          color="black"
-          style={{ marginRight: 10 }}
-        />
-        <Text style={styles.subTitle}>University of Washington</Text>
-      </View>
-      <View style={styles.profileContainer}>
-        <Ionicons
-          name="briefcase-outline"
-          size={18}
-          color="black"
-          style={{ marginRight: 10 }}
-        />
-        <Text style={styles.subTitle}>Facebook </Text>
-      </View>
+      <View style={{ width: 30 }} />
 
-      <View style={styles.card}>
-        <Text style={styles.title}>Bio</Text>
-        <Text style={styles.subTitle}>
-          I am a project manager at Facebook. I love to snowboard and watch
-          movies.{" "}
-        </Text>
-      </View>
-      <Text style={styles.title}>Interests</Text>
-      <View style={styles.profileContainer}>
-        <Chip icon="car" style={{ marginRight: 10 }}>
-          cars
-        </Chip>
-
-        <Chip icon="movie" style={{ marginRight: 10 }}>
-          Movies
-        </Chip>
-        <Chip icon="snowflake" style={{ marginRight: 10 }}>
-          Snowboarding
-        </Chip>
-      </View>
-
-      <Text style={styles.title}>Socials</Text>
-      <View style={styles.profileContainer}>
-        <Chip icon="instagram" style={{ marginRight: 10 }} mode="outlined">
-          Instagram
-        </Chip>
-        <Chip icon="linkedin" style={{ marginRight: 10 }} mode="outlined">
-          LinkedIn
-        </Chip>
-        <Chip icon="facebook" style={{ marginRight: 10 }} mode="outlined">
-          Facebook
-        </Chip>
-      </View>
+      <Link
+        href={{ pathname: "/connections", params: { tab: "pokes" } }}
+        asChild
+      >
+        <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ color: Colors.primary.dark, fontSize: 18, fontWeight: "bold" }}>21</Text>
+        <Text style={{ color: Colors.primary.dark }}>Pokes</Text></Pressable>
+      </Link>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingTop: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: Colors.secondary.main,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 32,
+    fontWeight: "900",
+    color: "white",
+    marginTop: 5,
   },
   subTitle: {
-    fontSize: 15,
-    fontWeight: "300",
+    fontSize: 22,
+    fontWeight: "600",
+    color: "white",
   },
+
   separator: {
-    marginVertical: 10,
-    height: 1,
+    marginVertical: 5,
     width: "100%",
   },
   profileContainer: {
     flexDirection: "row",
-    marginBottom: 20,
-  },
-  card: {
-    marginBottom: 20,
+    paddingBottom: 20,
+    backgroundColor: "transparent",
+    marginTop: 200,
   },
 });

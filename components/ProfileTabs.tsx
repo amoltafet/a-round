@@ -42,6 +42,7 @@ export default function ProfileTabs() {
         <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>Views: Drake</Text>
         </View>     
          </View>
+
   
     </ScrollView>
     </View>
@@ -84,11 +85,6 @@ export default function ProfileTabs() {
           Excited to meet new people and make new friends! 
         </Chip>
       </View>
-      
-
-
-
-
       <View style={styles.separator} />
       <View style={{ flexDirection: "row", marginBottom: 10 }}>
         <Ionicons
