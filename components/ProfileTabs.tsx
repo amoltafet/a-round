@@ -35,6 +35,14 @@ export default function ProfileTabs() {
         <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>Rainy Day</Text>
         </View>     
          </View>
+         <View style={{ alignItems: "center", marginRight: 10 }}>
+        <Image source={{ uri: "https://en.wikipedia.org/wiki/File:Drake_-_Views_cover.jpg" }} style={{ width: 150, height: 150, borderRadius: 10 }} />
+        <View style={{ flexDirection: "row", alignItems: "start", marginTop: 5 }}>
+        <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
+        <Text style={{ fontSize: 16, fontWeight: "400",  marginLeft: 5 }}>Views: Drake</Text>
+        </View>     
+         </View>
+
   
     </ScrollView>
     </View>
@@ -42,28 +50,41 @@ export default function ProfileTabs() {
 
   const SecondRoute = () => (
     <View >
+      <View 
+      style={{
+        marginBottom: 5, marginTop: 5, gap: 10, borderWidth: 0.5, borderColor: "grey", borderRadius: 10, padding: 10
+      }}>
       <ScrollView 
       horizontal={true}
       showsHorizontalScrollIndicator={false}
-      style={{
-        marginBottom: 10, marginTop: 10, gap: 10, borderWidth: 0.5, borderColor: "grey", borderRadius: 10, padding: 10
-      }}>
-        <Chip icon="heart" style={{margin: 1}}>
-          Single
+      style={{padding: 5 }}>
+        <Chip icon="cake" style={{marginRight: 10}}>
+          21
         </Chip>
-        <Chip icon="heart" style={{margin: 1}}>
-          Single
+        <Chip icon="account" style={{marginRight: 10}}>
+          Man
         </Chip>
-        <Chip icon="heart" style={{margin: 1}}>
-          Single
+        <Chip icon="ruler" style={{marginRight: 10}}>
+          5' 7
         </Chip>
-        <Chip icon="heart" style={{margin: 1}}>
-          Single
+        <Chip icon="invert-colors" style={{marginRight: 10}}>
+          White
         </Chip>
-        <Chip icon="heart" style={{margin: 1}}>
-          Single
+        <Chip icon="zodiac-gemini" style={{marginRight: 10}}>
+        Gemini
         </Chip>
       </ScrollView>
+    
+        <Chip icon="briefcase" style={{borderWidth: 0}}  mode="outlined">
+          Software Engineer at Expedia Group
+        </Chip>
+        <Chip icon="school" style={{ borderWidth: 0}} mode="outlined">
+          Student at Gonzaga Univeristy
+        </Chip>
+        <Chip icon="cake" style={{ borderWidth: 0}} mode="outlined">
+          Excited to meet new people and make new friends! 
+        </Chip>
+      </View>
       <View style={styles.separator} />
       <View style={{ flexDirection: "row", marginBottom: 10 }}>
         <Ionicons
