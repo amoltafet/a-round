@@ -55,11 +55,11 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
           borderRadius: 10,
           padding: 5,
           margin: 3,
-          backgroundColor: colorScheme === 'dark' ? Colors.dark.background: Colors.light.background,
+          backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
         }}
       >
         {avatar ? (
-          <View style={{ margin: 10, flexDirection: "row" }}>
+          <View style={{ margin: 10, flexDirection: "row",  alignItems: 'center', }}>
         <StackedAvatars
          avatars={mockUsers.slice(3, 7).map((user) => user.avatar)}
         />

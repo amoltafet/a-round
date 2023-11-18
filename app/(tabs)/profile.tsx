@@ -71,64 +71,8 @@ export default function ProfileScreen() {
       
       <Connections />
 
+
       <View style={styles.container} >
-      
-      <View style={{ flexDirection: "row", gap: 5, marginBottom: 5, flexWrap: "wrap"}}>
-        <Pressable style={{ 
-          borderWidth: 0.5,
-          borderColor: "grey", 
-          borderRadius: 10,
-          padding: 15,
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 5,
-          flex: 1
-        }} >
-            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" }} />
-            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Instagram</Text>
-        </Pressable>
-        
-        <Pressable style={{ 
-          borderWidth: 0.5,
-          borderColor: "grey", 
-          borderRadius: 10,
-          padding: 15,
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 5,
-          flex: 1
-        }} >
-            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/1200px-LinkedIn_icon.svg.png" }} />
-            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>LinkedIn</Text>
-        </Pressable>
-        <Pressable style={{ 
-          borderWidth: 0.5,
-          borderColor: "grey", 
-          borderRadius: 10,
-          padding: 15,
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 5,
-          flex: 1
-        }} >
-            <Avatar.Image size={18} source={{ uri: "https://assets.stickpng.com/images/580b57fcd9996e24bc43c536.png" }} />
-            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Snapchat</Text>
-        </Pressable>
-        <Pressable style={{ 
-          borderWidth: 0.5,
-          borderColor: "grey", 
-          borderRadius: 10,
-          padding: 15,
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 5,
-          flex: 1
-        }} >
-            <Avatar.Image size={18} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png" }} />
-            <Text style={{ fontSize: 12, fontWeight: "400", color: "grey"}}>Spotify</Text>
-        </Pressable>
-    
-      </View>
       <SettingsCard
         title="Private Profile"
         subTitle="Only your connections can see your profile"
@@ -136,6 +80,7 @@ export default function ProfileScreen() {
         toggle
         border
       />
+      
       <ProfileTabs />
       </View>
        
@@ -157,7 +102,6 @@ function Profile() {
   const styles = StyleSheet.create(
     {
     container: {
-      paddingTop: 20,
       paddingLeft: 10,
       paddingRight: 10,
       backgroundColor: "transparent",
