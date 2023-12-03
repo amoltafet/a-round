@@ -15,13 +15,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, router } from "expo-router";
 import Colors from "../../constants/Colors";
 import { TabView, SceneMap } from "react-native-tab-view";
-import React from "react";
+import React, { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import mockUsers from "../mock/MockData";
 import ProfileTabs from "../../components/ProfileTabs";
 import { FontAwesome } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import { color } from "react-native-elements/dist/helpers";
+import { auth } from "../../firebase";
+
 export default function ProfileScreen() {
   const colorScheme = useColorScheme();
   const styles = StyleSheet.create(
@@ -63,7 +65,7 @@ export default function ProfileScreen() {
       style={{ paddingBottom: 80, backgroundColor: colorScheme === "dark" ? Colors.dark.background : Colors.light.background
       }}
     >
-      <Image source={{ uri: "https://images.inc.com/uploaded_files/image/1920x1080/getty_481292845_77896.jpg" }} style={{ width: "100%", height: 350, overflow: "hidden", 
+      <Image source={{ uri: "https://media.licdn.com/dms/image/C4E03AQH5b8z18kBWiA/profile-displayphoto-shrink_800_800/0/1526331777660?e=1705536000&v=beta&t=AOlXp_JXeWWQOwEK8WemEZ_XOPE0tO5Lfx9hRizy6_o" }} style={{ width: "100%", height: 350, overflow: "hidden", 
        backgroundColor: "rgba(0,0,0,0.3)",
     }} >
           <Profile />
@@ -96,9 +98,9 @@ export default function ProfileScreen() {
   );
 }
 
-const User = mockUsers[0];
 
 function Profile() {
+  const [user, setUser] = React.useState([auth.currentUser]);
   const styles = StyleSheet.create(
     {
     container: {
@@ -134,7 +136,7 @@ function Profile() {
      
       <View style={{ marginLeft: 10, backgroundColor: "transparent" }}>
         <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
-          <Text style={styles.title}>{User.name}</Text>
+          <Text style={styles.title}>{auth.currentUser?.displayName}</Text>
           <IconButton
             icon="check"
             size={10}
@@ -147,7 +149,7 @@ function Profile() {
           />
         </View>
 
-        <Text style={styles.subTitle}>@{User.username}</Text>
+        <Text style={styles.subTitle}>{auth.currentUser?.email}</Text>
         <View style={styles.separator} />
         <View style={{
           borderWidth: 0.5,

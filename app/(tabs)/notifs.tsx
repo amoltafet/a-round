@@ -40,9 +40,9 @@ export default function NotifsScreen() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Notifications</Text>
       <SettingsCard
-        title="Poked Requests"
+        title="Wave Requests"
         subTitle="Approve or deny your poke requests!"
-        icon="notifications-outline"
+        icon="hand-left-outline"
         border
         link="/connections"
       />

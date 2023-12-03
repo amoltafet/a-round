@@ -96,7 +96,7 @@ export default function ProfileTabs() {
             People who poked you.{" "}
           </Text>
         </View>
-        {mockUsers.slice(0, 10).map((user) => (
+        {mockUsers.slice(1, 5).map((user) => (
           <UserCard
             username={user.username}
             name={user.name}
@@ -125,7 +125,7 @@ export default function ProfileTabs() {
             People who you requested to connect.{" "}
           </Text>
         </View>
-        {mockUsers.slice(0, 5).map((user) => (
+        {mockUsers.slice(8, 11).map((user) => (
           <UserCard
             username={user.username}
             name={user.name}

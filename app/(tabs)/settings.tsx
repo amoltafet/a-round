@@ -1,4 +1,4 @@
-import { StyleSheet, useColorScheme } from 'react-native';
+import { Pressable, StyleSheet, useColorScheme } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import SettingsCard from '../../components/SettingsCard';
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,6 +6,10 @@ import {
   DarkTheme,
   DefaultTheme,
 } from "@react-navigation/native";
+import { signOut } from 'firebase/auth';
+import { router } from 'expo-router';
+import { auth } from '../../firebase';
+
 export default function ModalScreen() {
   const colorTheme = useColorScheme();
   const styles = StyleSheet.create({
@@ -34,6 +38,14 @@ export default function ModalScreen() {
     },
   });
 
+  const signOutNow = () => {
+    signOut(auth).then(() => {
+        router.push('/login');
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
   
   return (
     <SafeAreaView style={styles.container}>
@@ -51,7 +63,9 @@ export default function ModalScreen() {
        <SettingsCard title="Terms and Conditions" subTitle='Read our terms and conditions' icon="document-text-outline" link='editProfile'/>
 
        <View style={styles.separator} />
-       <SettingsCard title="Logout" icon="log-out-outline" subTitle='Logout from your account' link='login' />
+       <Pressable onPress={signOutNow}>
+        <Text style={styles.title}>Log Out</Text>
+        </Pressable>
 
        <View style={styles.separator} />
        <Text style={styles.title}>You joined a-round on November 5, 2021 </Text>

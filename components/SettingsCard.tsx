@@ -30,7 +30,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
   toggle,
   link,
   border,
-  avatar
+  avatar,
 }) => {
   const [toggleState, setToggleState] = useState(false);
   const handleToggle = () => {
@@ -70,14 +70,14 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
         />
         </View>
       ) : (
-        <Ionicons name={icon} size={26} color={ colorScheme === 'dark' ? DarkTheme.colors.text : DefaultTheme.colors.text}
+        <Ionicons name={icon} size={22} color={ colorScheme === 'dark' ? DarkTheme.colors.text : DefaultTheme.colors.text}
         
         style={{ margin: 10 }} />
       )}
         <View style={{ flex: 1, margin: 5, backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
           marginTop: avatar ? 10 : 5
         }}>
-          <Text style={{ fontSize: 19, fontWeight: "500",
+          <Text style={{ fontSize: 16, fontWeight: "500",
           color: colorScheme === 'dark' ? DarkTheme.colors.text : DefaultTheme.colors.text
         }}>{title}</Text>
           <Text style={{ fontSize: 12, color: "grey" }}>{subTitle}</Text>
@@ -92,7 +92,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
         ) : (
           <Ionicons
             name="chevron-forward"
-            size={24}
+            size={22}
             color={colorScheme === 'dark' ? DefaultTheme.colors.background : DarkTheme.colors.background }
             style={{ margin: 10, marginTop: avatar ? 15 : 10 }}
           />

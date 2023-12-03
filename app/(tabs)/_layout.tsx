@@ -1,85 +1,105 @@
 import { useColorScheme } from "react-native";
 import Colors from "../../constants/Colors";
-import { Avatar, Badge} from "react-native-paper";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Map from "./map";
+import { Avatar, Badge } from "react-native-paper";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import Map from "../map";
 import Profile from "./profile";
 import Notifs from "./notifs";
 import Settings from "./settings";
+import Nerby from ".";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Animated } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import React, { useCallback, useEffect, useState } from "react";
+import Messages from "./messages";
+import { auth } from "../../firebase";
 
+SplashScreen.preventAutoHideAsync();
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;
 }) {
-  return <MaterialCommunityIcons size={24}  {...props} />;
+  return <MaterialCommunityIcons size={24} {...props} />;
 }
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
   const Tab = createMaterialTopTabNavigator();
-  // catch error or loading state sending onAnimatedValueUpdate
-
-  const av = new Animated.Value(0);
-  av.addListener(() => {return});
-
 
   return (
     <Tab.Navigator
       tabBarPosition="bottom"
-      initialRouteName="map"
+      initialRouteName="index"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         tabBarInactiveTintColor: "grey",
         tabBarIndicatorContainerStyle: {
-          backgroundColor: colorScheme === 'dark' ? Colors.dark.background: Colors.light.background,
+          backgroundColor:
+            colorScheme === "dark"
+              ? Colors.dark.background
+              : Colors.light.background,
           borderRadius: 20,
           marginBottom: 25,
         },
         tabBarIndicatorStyle: {
-          backgroundColor: Colors[colorScheme ?? "light"].tint,
-        }, 
-      
-        
-        
+          backgroundColor: Colors[colorScheme ?? "light"].tint
+        },
+        tabBarStyle: {
+          borderTopWidth: 0.5,
+          borderTopColor: "#e6e6e6",
+          elevation: 1,
+          shadowColor: "grey",
+          shadowOpacity: 0.1,
+          shadowRadius: 15,
+          shadowOffset: { width: 0, height: 0 }
+        },
       }}
     >
-      <Tab.Screen
-        name="map"
-        options={{
-          title: "Map",
-          tabBarLabel: "",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="map-marker-account" color={color} />
-          ),
-         
-          
-        }} 
-        component={Map}
-
-        />
-       <Tab.Screen
+  
+  <Tab.Screen
         name="profile"
         options={{
           title: "",
           tabBarIcon: ({ color }) => (
-           
-              <Avatar.Image
-                size={24}
-                source={{
-                  uri: "https://randomuser.me/api/portraits/men/1.jpg",
-                }}
-              />
+            <Avatar.Image
+              size={24}
+              source={{
+                uri: "https://randomuser.me/api/portraits/men/1.jpg",
+              }}
+            />
           ),
-         
         }}
         component={Profile}
-
       />
-    
+         <Tab.Screen
+        name="messages"
+        options={{
+          title: "Messages",
+          tabBarLabel: "",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="message-outline" color={color} />
+          ),
+          
+        }}
+        component={Messages}
+      />
+
+      
+          <Tab.Screen
+        name="index"
+        options={{
+          title: "Nerby",
+          tabBarLabel: "",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="map-marker-account" color={color} />
+          ),
+        }}
+        component={Nerby}
+      />
+ 
+
+
       <Tab.Screen
         name="notifs"
         options={{
@@ -88,13 +108,12 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="bell-outline" color={color} />
           ),
-          
-         
         }}
         component={Notifs}
-
       />
+
     
+
       <Tab.Screen
         name="settings"
         options={{
@@ -102,12 +121,9 @@ export default function TabLayout() {
           tabBarLabel: "",
           tabBarShowLabel: true,
           tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
-         
         }}
         component={Settings}
       />
     </Tab.Navigator>
-    
-   
   );
 }

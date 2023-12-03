@@ -18,7 +18,15 @@ import {
     const colorScheme = useColorScheme();
   
     return (
-      <Stack>
+      <Stack >
+        <Stack.Screen
+          name="index"
+          options={{
+            headerShown: false,
+            title: "Onboarding",
+          }}
+        />
+
         <Stack.Screen
           name="login"
           options={{

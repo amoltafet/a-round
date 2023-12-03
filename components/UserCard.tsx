@@ -109,7 +109,7 @@ const UserCard: React.FC<UserCardProps> = ({
                 style={{ margin: 10, backgroundColor: Colors.secondary.dark }}
                 textStyle={{ fontSize: 12 }}
               >
-                <Text style={{ color: "grey" }}>Accept</Text>
+                <Text style={{ color: "grey" }}>Wave back 👋</Text>
               </Chip>
             </>
           ) : (
