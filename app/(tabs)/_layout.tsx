@@ -32,19 +32,10 @@ export default function TabLayout() {
       tabBarPosition="bottom"
       initialRouteName="index"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: "black",
+
+        tabBarIndicator: () => null,
         tabBarInactiveTintColor: "grey",
-        tabBarIndicatorContainerStyle: {
-          backgroundColor:
-            colorScheme === "dark"
-              ? Colors.dark.background
-              : Colors.light.background,
-          borderRadius: 20,
-          marginBottom: 25,
-        },
-        tabBarIndicatorStyle: {
-          backgroundColor: Colors[colorScheme ?? "light"].tint
-        },
         tabBarStyle: {
           borderTopWidth: 0.5,
           borderTopColor: "#e6e6e6",
@@ -52,8 +43,10 @@ export default function TabLayout() {
           shadowColor: "grey",
           shadowOpacity: 0.1,
           shadowRadius: 15,
+          paddingVertical: 5,
           shadowOffset: { width: 0, height: 0 }
         },
+       
       }}
     >
   
@@ -62,11 +55,7 @@ export default function TabLayout() {
         options={{
           title: "",
           tabBarIcon: ({ color }) => (
-            <Avatar.Image
-              size={24}
-              source={{
-                uri: "https://randomuser.me/api/portraits/men/1.jpg",
-              }}
+            <TabBarIcon name="account"color={color}
             />
           ),
         }}
@@ -78,15 +67,25 @@ export default function TabLayout() {
           title: "Messages",
           tabBarLabel: "",
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="message-outline" color={color} />
+           <>
+            <TabBarIcon name="chat-processing" color={color} />
+            <Badge
+              size={12}
+              style={{
+                position: "absolute",
+                top: -4,
+                right: -4,
+                backgroundColor: "tomato",
+              }}
+            > </Badge>
+            </>
           ),
-          
         }}
         component={Messages}
       />
 
       
-          <Tab.Screen
+         <Tab.Screen
         name="index"
         options={{
           title: "Nerby",

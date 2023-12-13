@@ -10,19 +10,19 @@ import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
 import { GiftedChat } from "react-native-gifted-chat";
 import { router } from "expo-router";
-import { collection, addDoc, getDocs, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, orderBy, onSnapshot, updateDoc, doc } from 'firebase/firestore';
 import mockUsers from "../app/mock/MockData";
 import { Ionicons } from "@expo/vector-icons";
 import { InputToolbar, Actions, Composer, Send } from 'react-native-gifted-chat';
+import { update } from "firebase/database";
 
 
 const Chat = ({uid}) => {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(auth.currentUser);
   const currentUserID = auth.currentUser.uid;
-  const chatId = uid > user.uid ? currentUserID + "-" + uid : uid+ "-" +currentUserID
+  const chatId = uid > user.uid ? currentUserID + "-" + uid : uid+ "-" + currentUserID
   const [typing, setTyping] = useState(null);
-
   const onSend = (messages = []) => {
     if (messages[0].text === "") {
       return;
@@ -33,7 +33,27 @@ const Chat = ({uid}) => {
       createdAt,
       text,
       user
-    })
+    });
+
+    updateDoc(doc(db, 'users', currentUserID), {
+      chats: {
+        [chatId]: {
+          to: uid,
+          lastMessage: text,
+          timestamp: createdAt,
+        },
+      },
+    });
+
+    updateDoc(doc(db, 'users', uid), {
+      chats: {
+        [chatId]: {
+          to: currentUserID,
+          lastMessage: text,
+          timestamp: createdAt,
+        },
+      },
+    });
   }
 
   useLayoutEffect(() => {
@@ -105,9 +125,6 @@ const Chat = ({uid}) => {
   }
 
 
-
-
-
   return (
     <View style={{ flex: 1 }}>
     <GiftedChat
@@ -167,9 +184,6 @@ const Chat = ({uid}) => {
         );
 
       }}  
-
-
-
       onSend={(messages) => onSend(messages)}
       user={{
         _id: user.email,

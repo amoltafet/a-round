@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
   <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
   <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -39,6 +40,7 @@
         <data android:scheme="myapp"/>
         <data android:scheme="com.amoltafet.radii"/>
         <data android:scheme="exp+radii"/>
+        <data android:scheme="exp+peal"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>

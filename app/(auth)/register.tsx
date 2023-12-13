@@ -36,10 +36,11 @@ const Register = () => {
                   email: email,
                   avatar: 'https://gravatar.com/avatar/94d45dbdba988afacf30d916e7aaad69?s=200&d=mp&r=x',
                   bio: '',
-                  followers: [],
+                  requests: [],
                   following: [],
                   posts: [],
                   saved: [],
+                  points : 0,
               })
               .then(() => {
                   console.log('Document successfully written!');

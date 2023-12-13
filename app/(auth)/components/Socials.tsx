@@ -5,14 +5,17 @@ import { View, Alert, StyleSheet } from 'react-native';
 import { SocialIcon } from 'react-native-elements';
 import { Button, Icon, IconButton } from 'react-native-paper';
 import { auth } from '../../../firebase';
+import { useDispatch } from 'react-redux';
+import { handleSignIn } from '../../../context/actions/authAction';
 
 const Socials = () => {
+  const dispatch = useDispatch();
   const handleGoogleSignIn = async () => {
     signInWithEmailAndPassword(auth, "test@gmail.com", "Learn4good")
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      router.push('/(tabs)');
+      router.push('/profile');
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -21,8 +24,9 @@ const Socials = () => {
     });
   };
 
-  const handleAppleSignIn = async () => {
-      Alert.alert('Error', 'Failed to sign in with Apple');
+  const handleAppleSignIn =  () => {
+    
+    dispatch(handleSignIn("test2@gmail.com", "Learn4good"));
     
   };
 

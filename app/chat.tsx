@@ -17,6 +17,7 @@ import { Avatar } from 'react-native-paper';
 
 export default function ChatScreen() {
   const {toUser} = useLocalSearchParams<{toUser: string}>() 
+  console.log(toUser)
   const [user, setUser] = useState <any>({})
 
   useEffect(()=>{
@@ -24,6 +25,7 @@ export default function ChatScreen() {
       const querySnapshot = await getDocs(collection(db, 'users'))
       const users = querySnapshot.docs.map(docSnap=>docSnap.data())
       const user = users.find(user=>user.id === toUser)
+
       setUser(user)
     }
     getUser()
@@ -35,8 +37,14 @@ export default function ChatScreen() {
         <Pressable onPress={() => router.back()}>
         <Ionicons name='arrow-back-circle' size={30} color='grey' />
         </Pressable>
-
-        <Avatar.Image size={32} source={{ uri: user.avatar }} style={{marginLeft: 15}}/>
+        
+        {
+          user?.online && <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: 'green', marginLeft: 10, marginTop: 10 }} />
+        }
+        {
+          user?.avatar && <Avatar.Image size={32} source={{ uri: user.avatar }} style={{marginLeft: 15}}/>
+        }
+        {/* <Avatar.Image size={32} source={{ uri: user.avatar }} style={{marginLeft: 15}}/> */}
         <Text style={{ fontSize: 16, fontWeight: '600', marginLeft: 10, marginTop: 5 }}> 
           {user.name}
         </Text>

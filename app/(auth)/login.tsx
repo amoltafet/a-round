@@ -10,25 +10,17 @@ import { CheckBox } from 'react-native-elements';
 import CheckBoxIcon from 'react-native-elements/dist/checkbox/CheckBoxIcon';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch } from 'react-redux';
+import { handleSignIn } from '../../context/actions/authAction';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checked, setChecked] = React.useState(false);
-
+  const [checked, setChecked] = useState(false);
 
   const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        router.push('/(tabs)/');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-      });
+    dispatch(handleSignIn(email, password));
   };
 
   return (

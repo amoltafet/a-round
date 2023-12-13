@@ -297,7 +297,11 @@ const mockUsers: User[] = [
                 read: false
             }
         ],
-        blocked: []
+        blocked: [],
+        location: {
+            latitude: 47.705481,
+            longitude: -122.16874
+        }
     },
     {
         id: 9,
@@ -329,7 +333,11 @@ const mockUsers: User[] = [
                 read: false
             }
         ],
-        blocked: []
+        blocked: [],
+        location: {
+            latitude: 47.705481,
+            longitude: -122.16874
+        }
     },
     {
         id: 10,
@@ -393,7 +401,11 @@ const mockUsers: User[] = [
                 read: false
             }
         ],
-        blocked: []
+        blocked: [],
+        location: {
+            latitude: 47.705481,
+            longitude: -122.16874
+        }
     },
    
 ];

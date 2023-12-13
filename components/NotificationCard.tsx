@@ -25,21 +25,18 @@ export default function NotificationCard({
     <View
       style={{
         flexDirection: "row",
+        gap: 5,
         backgroundColor: colorScheme === 'dark' ? Colors.dark.background: Colors.light.background,
-        borderRadius: 10,
-        margin: 3,
       }}
     >
         {avatar ? (
-      <Avatar.Image size={42} source={{uri: avatar}} style={{ margin: 12 }} />
+      <Avatar.Image size={32} source={{uri: avatar}} style={{ margin: 12}} />
     ) : (
-        <Avatar.Text size={42} label="XD" style={{ margin: 10 }} />
+        <Avatar.Text size={32} label="XD" style={{ margin: 10 }} />
     )}
       <View style={{ flex: 1, marginTop: 15, backgroundColor: colorScheme === 'dark' ? Colors.dark.background: Colors.light.background, }}>     
-        <Text style={{ fontSize: 15, fontWeight: "bold" }}>{title}</Text>
-        <Text style={{ fontSize: 12, color: 
-        colorScheme === 'dark' ? Colors.dark.text: Colors.light.text
-        }}>{subtitle}</Text>
+        <Text style={{ fontSize: 14, fontWeight: "600" }}>{title}</Text>
+        <Text style={{ fontSize: 10, color: "grey" }}>{subtitle}</Text>
       </View>
 
       {date ? (

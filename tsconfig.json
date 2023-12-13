@@ -8,5 +8,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "components/Chat.js"  ]
+, "components/Chat.js", "state/UsersNerby.js", "state/UserLocation.js", "firebase.js"  ]
 }

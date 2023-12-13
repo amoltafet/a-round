@@ -1,8 +1,9 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { initializeAuth, getAuth, getReactNativePersistence } from 'firebase/auth';
 import { initializeFirestore } from "firebase/firestore";
-//import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { store } from './context/store';
+import { setUser, clearUser } from './context/reducers/authSlice'; 
 
 const firebaseConfig = {
   apiKey: "AIzaSyDSWxfoP_DkzAGIsCExq2YMw3l0C1coQrc",
@@ -15,9 +16,27 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = initializeAuth(app);
-const db = initializeFirestore(app, {experimentalForceLongPolling: true});
+let app;
+let auth;
 
+if (getApps().length < 1) {
+  app = initializeApp(firebaseConfig);
+  auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage),
+  });
+} else {
+  app = getApp();
+  auth = getAuth();
+}
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    store.dispatch(setUser(user));
+  } else {
+    store.dispatch(clearUser());
+  }
+});
+
+const db = initializeFirestore(app, {experimentalForceLongPolling: true});
 
 export { db, auth };

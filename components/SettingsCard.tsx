@@ -7,10 +7,7 @@ import { Link, router } from "expo-router";
 import { Pressable } from "react-native";
 import StackedAvatars from "./StackedAvatars";
 import mockUsers from "../app/mock/MockData";
-import {
-  DarkTheme,
-  DefaultTheme,
-} from "@react-navigation/native";
+import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
 
 interface SettingsCardProps {
@@ -21,6 +18,8 @@ interface SettingsCardProps {
   link?: string | "[...missing]";
   border?: boolean;
   avatar?: boolean;
+  value?: boolean;
+  onToggle?: () => void;
 }
 
 const SettingsCard: React.FC<SettingsCardProps> = ({
@@ -31,11 +30,9 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
   link,
   border,
   avatar,
+  onToggle,
+  value,
 }) => {
-  const [toggleState, setToggleState] = useState(false);
-  const handleToggle = () => {
-    setToggleState(!toggleState);
-  };
   const colorScheme = useColorScheme();
 
   return (
@@ -43,9 +40,9 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
       onPress={() => {
         if (link) {
           router.push(link);
-        } 
-      } }
-      style={{ backgroundColor: Colors.secondary.text }}
+        }
+      }}
+      style={{ backgroundColor: Colors.secondary.text}}
     >
       <View
         style={{
@@ -55,49 +52,88 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
           borderRadius: 10,
           padding: 5,
           margin: 3,
-          backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
+          backgroundColor:
+            colorScheme === "dark"
+              ? Colors.dark.background
+              : Colors.light.background,
         }}
       >
         {avatar ? (
-          <View style={{ margin: 10, flexDirection: "row",  alignItems: 'center', }}>
-        <StackedAvatars
-         avatars={mockUsers.slice(3, 7).map((user) => user.avatar)}
-        />
-        <Avatar.Image
-          size={35}
-          source={{ uri: mockUsers[0].avatar }}
-          style={{ backgroundColor: Colors.primary.dark }}
-        />
-        </View>
-      ) : (
-        <Ionicons name={icon} size={22} color={ colorScheme === 'dark' ? DarkTheme.colors.text : DefaultTheme.colors.text}
-        
-        style={{ margin: 10 }} />
-      )}
-        <View style={{ flex: 1, margin: 5, backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
-          marginTop: avatar ? 10 : 5
-        }}>
-          <Text style={{ fontSize: 16, fontWeight: "500",
-          color: colorScheme === 'dark' ? DarkTheme.colors.text : DefaultTheme.colors.text
-        }}>{title}</Text>
+          <View
+            style={{ margin: 10, flexDirection: "row", alignItems: "center" }}
+          >
+            <StackedAvatars
+              avatars={mockUsers.slice(3, 7).map((user) => user.avatar)}
+            />
+            <Avatar.Image
+              size={35}
+              source={{ uri: mockUsers[0].avatar }}
+              style={{ backgroundColor: Colors.primary.dark }}
+            />
+          </View>
+        ) : (
+          <Ionicons
+            name={icon}
+            size={22}
+            color={
+              colorScheme === "dark"
+                ? DarkTheme.colors.text
+                : DefaultTheme.colors.text
+            }
+            style={{ margin: 10 }}
+          />
+        )}
+        <View
+          style={{
+            margin: 5,
+            flex: 1,
+            backgroundColor:
+              colorScheme === "dark"
+                ? Colors.dark.background
+                : Colors.light.background,
+            marginTop: avatar ? 10 : 5,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 16,
+              
+              fontWeight: "500",
+              color:
+                colorScheme === "dark"
+                  ? DarkTheme.colors.text
+                  : DefaultTheme.colors.text,
+            }}
+          >
+            {title}
+          </Text>
           <Text style={{ fontSize: 12, color: "grey" }}>{subTitle}</Text>
         </View>
         {toggle ? (
           <Switch
-            value={toggleState}
-            onValueChange={handleToggle}
-            style={{ margin: 10}}
-            color={colorScheme === 'dark' ? DefaultTheme.colors.background : DarkTheme.colors.background }
+            value={value}
+            onValueChange={onToggle}
+            style={{ margin: 10, marginLeft: "auto" }}
+            color={
+              colorScheme === "dark"
+                ? DefaultTheme.colors.background
+                : DarkTheme.colors.background
+            }
           />
         ) : (
           <Ionicons
             name="chevron-forward"
             size={22}
-            color={colorScheme === 'dark' ? DefaultTheme.colors.background : DarkTheme.colors.background }
-            style={{ margin: 10, marginTop: avatar ? 15 : 10 }}
+            color={
+              colorScheme === "dark"
+                ? DefaultTheme.colors.background
+                : DarkTheme.colors.background
+            }
+            style={{ margin: 10, marginTop: avatar ? 15 : 10,
+              marginLeft: "auto"
+            }}
           />
         )}
-       
       </View>
     </Pressable>
   );

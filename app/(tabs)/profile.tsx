@@ -91,7 +91,7 @@ export default function ProfileScreen() {
           size={32}
           color="white"
           style={{ position: "absolute", top: 50, right: 10, backgroundColor: "transparent" }}
-          onPress={() => router.push("/index")}
+          onPress={() => router.push("/editProfile")}
         />
 
     </ScrollView>
@@ -212,6 +212,7 @@ function Connections() {
         borderWidth: 0.5,
         borderColor: "lightgrey",
       }}
+
     >
       <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
         <Ionicons name="eye" size={22} color="green" />
@@ -247,6 +248,7 @@ function Connections() {
         href={{ pathname: "/connections", params: { tab: "pokes" } }}
         asChild
       >
+        
         <Pressable style={{ justifyContent: "center", alignItems: "center" }}>
         <Text style={{ color:  colorScheme === "dark" ? Colors.dark.text : Colors.light.text, fontSize: 18, fontWeight: "bold" }}>21</Text>
         <Text style={{ color:  colorScheme === "dark" ? Colors.dark.text : Colors.light.text }}>Pokes</Text></Pressable>

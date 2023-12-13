@@ -15,25 +15,14 @@ for ios: press i
     - for development server start: npx expo start --dev-client
 for android: press a
     - for development: eas build --profile development-emulator --platform android
-
-Local Build:
-    -- brew install chruby
-    -- brew install ruby-install
-
-    -- ruby-install ruby 3.1.3
     
-    Then you have to update your ~/.zshrc with the following.
+## IOS Build Process
+    -- sudo chmod -R 777 root-folder (for permission)
+    // do this once and everytime app.json is changed or new native package is added
+    -- npx expo prebuild
+    -- npx pod-install
+    -- MAKE SURE TO OPEN THE PROJECT FROM .xcworkspace file IN XCODE (not .xcodeproj)
 
-        source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-        source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-        chruby ruby-3.1.3
-        
-    Then install cocoapods. I didn't have to use sudo
-
-        gem install cocoapods
-
-
-    
 
 ## Prerequisites
 

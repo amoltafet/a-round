@@ -23,7 +23,7 @@ export default function TabLayout() {
       headerStyle: { backgroundColor: Colors.secondary.main },
       headerShadowVisible: false,
       headerTintColor: "#000",
-      headerTitleStyle: { fontWeight: "500", fontSize: 20 },
+      headerShown: false,
       contentStyle: { backgroundColor: Colors.secondary.main },
     }}
     >
@@ -73,6 +73,34 @@ export default function TabLayout() {
         name="privacy"
         options={{
           title: "Privacy",
+          headerLeft: () => (
+            <Button
+              onPress={() => {
+                router.back();
+              }}
+              title="Back"
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="blockedUsers"
+        options={{
+          title: "Blocked Users",
+          headerLeft: () => (
+            <Button
+              onPress={() => {
+                router.back();
+              }}
+              title="Back"
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="locationPreferences"
+        options={{
+          title: "Location Preferences",
           headerLeft: () => (
             <Button
               onPress={() => {
